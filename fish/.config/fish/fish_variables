@@ -155,6 +155,7 @@ SETUVAR _tide_prompt_88732:\x1d
 SETUVAR _tide_prompt_93956:\x1d
 SETUVAR _tide_prompt_94718:\x1d
 SETUVAR _tide_prompt_9511:\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\uf179\x1b\x5b38\x3b5\x3b246m\x20\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x40PWD\x40\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x20\x1e\x1b\x5b38\x3b5\x3b196m\u276f\x1e\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x20\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x5b38\x3b5\x3b101m\uf252\x208s\x1b\x5b38\x3b5\x3b246m\x20\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x5b38\x3b5\x3b62m\u2388\x20default\x1b\x5b38\x3b5\x3b246m\x20\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x5b38\x3b5\x3b66m00\x3a47\x3a53\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm\x1b\x28B\x1b\x5bm
+SETUVAR _tide_prompt_95395:\x1d
 SETUVAR _tide_prompt_96033:\x1d
 SETUVAR _tide_prompt_97453:\x1d
 SETUVAR _tide_prompt_97487:\x1d
@@ -164,7 +165,7 @@ SETUVAR _tide_prompt_98785:\x1d
 SETUVAR _tide_prompt_98991:\x1d
 SETUVAR _tide_prompt_99095:\x1d
 SETUVAR _tide_right_items:status\x1ecmd_duration\x1econtext\x1ejobs\x1enode\x1evirtual_env\x1ejava\x1ego\x1ekubectl\x1eaws\x1etime
-SETUVAR fish_color_autosuggestion:555\x1ebrblack
+SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue
 SETUVAR fish_color_comment:red
@@ -181,15 +182,15 @@ SETUVAR fish_color_operator:brcyan
 SETUVAR fish_color_param:cyan
 SETUVAR fish_color_quote:yellow
 SETUVAR fish_color_redirection:cyan\x1e\x2d\x2dbold
-SETUVAR fish_color_search_match:\x2d\x2dbackground\x3d111
+SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
 SETUVAR fish_color_valid_path:\x2d\x2dunderline
 SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_pager_color_completion:normal
-SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
-SETUVAR fish_pager_color_prefix:cyan\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
+SETUVAR fish_pager_color_description:yellow\x1e\x2di
+SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_user_paths:/opt/homebrew/bin
