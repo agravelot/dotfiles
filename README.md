@@ -26,3 +26,10 @@ then use GNU stow to create symlinks
 ```
 $ stow -t ~ .
 ```
+
+
+
+Useful commands:
+```bash
+stow --adopt -v -t ~ tmux # adopt the symlinks
+```
