@@ -6,5 +6,5 @@ MODULES="fish git nvim tmux yabai alacritty karabiner yabai skhd starship zsh"
 
 for module in $MODULES; do
 	echo "Stowing $module"
-	stow "$module"
+	stow -t ~ . "$module"
 done
