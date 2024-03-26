@@ -1,6 +1,10 @@
 [user]
 	name = Antoine GRAVELOT
 	email = antoine.gravelot@hotmail.fr
+; git@git.infra.kreactive.eu
+[includeIf "hasconfig:remote.*.url:git@git.infra.kreactive.eu:*/**"]
+  path = ~/.gitconfig-work
+
 [core]
 	autocrlf = input
 [color]
@@ -52,3 +56,4 @@
   uncommit = reset --soft HEAD~1
   # Remove file(s) from Git but not from disk
   untrack = rm --cache --
+
