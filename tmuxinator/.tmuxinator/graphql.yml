@@ -1,0 +1,20 @@
+name: graphql
+root: ~/lab/graphql
+
+on_project_start: docker compose up -d
+
+on_project_stop: docker compose stop
+
+windows:
+  - editor:
+      root: ~/lab/graphql
+      layout: main-vertical
+      panes:
+        - nvim .
+        # - npm run start:dev
+      # commands:
+      #   - $EDITOR .
+  - server:
+      root: ~/lab/graphql
+      panes:
+        - npm run start:dev
