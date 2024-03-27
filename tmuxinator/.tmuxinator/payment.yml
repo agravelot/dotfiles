@@ -1,0 +1,20 @@
+name: payment
+root: ~/lab/payment
+
+on_project_start: docker compose up -d
+
+on_project_stop: docker compose stop
+
+windows:
+  - editor:
+      root: ~/lab/payment
+      layout: main-vertical
+      panes:
+        - nvim .
+        # - npm run start:dev
+      # commands:
+      #   - $EDITOR .
+  - server:
+      root: ~/lab/payment
+      panes:
+        - npm run start:dev
