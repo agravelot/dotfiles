@@ -1,5 +1,5 @@
-name: gutenberg
-root: ~/lab/gutenberg_v2
+name: digischool-fr-next-2-tailwind
+root: ~/lab/digischool-fr-next-2-tailwind
 
 on_project_start: docker compose up -d
 
@@ -7,7 +7,7 @@ on_project_stop: docker compose stop
 
 windows:
   - editor:
-      root: ~/lab/gutenberg_v2
+      root: ~/lab/digischool-fr-next-2-tailwind
       layout: main-vertical
       panes:
         - nvim .
@@ -15,6 +15,6 @@ windows:
       # commands:
       #   - $EDITOR .
   - server:
-      root: ~/lab/gutenberg_v2
+      root: ~/lab/digischool-fr-next-2-tailwind
       panes:
         - npm run start:dev

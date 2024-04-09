@@ -1,6 +1,7 @@
 [user]
 	name = Antoine GRAVELOT
 	email = antoine.gravelot@hotmail.fr
+
 ; git@git.infra.kreactive.eu
 [includeIf "hasconfig:remote.*.url:git@git.infra.kreactive.eu:*/**"]
   path = ~/.gitconfig-work
@@ -12,6 +13,7 @@
 	ui = auto 
 [branch]
 	autosetuprebase = always
+	sort = -committerdate
 [pull]
 	rebase = merges
 [push]
@@ -19,9 +21,11 @@
   followTags = true
 [stash]
 	showPatch = true
+  all = true
 [rebase]
 	autostash = true
 	autosquash = true
+	updateRefs = true
 [commit]
 	verbose = true
 [submodule]
@@ -57,4 +61,9 @@
   uncommit = reset --soft HEAD~1
   # Remove file(s) from Git but not from disk
   untrack = rm --cache --
+	staash = stash --all
 
+[rerere]
+	enabled = true
+[column]
+	ui = auto

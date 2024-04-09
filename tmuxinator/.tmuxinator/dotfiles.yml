@@ -1,5 +1,5 @@
-name: gutenberg
-root: ~/lab/gutenberg_v2
+name: dotfiles
+root: ~/lab/dotfiles
 
 on_project_start: docker compose up -d
 
@@ -7,14 +7,9 @@ on_project_stop: docker compose stop
 
 windows:
   - editor:
-      root: ~/lab/gutenberg_v2
+      root: ~/lab/dotfiles
       layout: main-vertical
       panes:
         - nvim .
-        # - npm run start:dev
       # commands:
       #   - $EDITOR .
-  - server:
-      root: ~/lab/gutenberg_v2
-      panes:
-        - npm run start:dev

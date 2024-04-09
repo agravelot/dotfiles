@@ -2,19 +2,23 @@
 size = 13.0
 
 [font.bold]
-family = "JetbrainsMono NF"
+# family = "JetbrainsMono NF"
+family = "Maple Mono NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetbrainsMono NF"
+# family = "JetbrainsMono NF"
+family = "Maple Mono NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetbrainsMono NF"
+# family = "JetbrainsMono NF"
+family = "Maple Mono NF"
 style = "Italic"
 
 [font.normal]
-family = "JetbrainsMono NF"
+# family = "JetbrainsMono NF"
+family = "Maple Mono NF"
 style = "Regular"
 #
 
