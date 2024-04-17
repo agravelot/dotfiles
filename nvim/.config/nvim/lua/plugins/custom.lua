@@ -76,24 +76,49 @@ return {
       })
     end,
   },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      local cmp = require("cmp")
+
+      -- opts.mapping = vim.mapping("force", opts.mapping, { ["<CR>"] = nil })
+
+      opts.preselect = cmp.PreselectMode.None
+      opts.completion = {
+        completeopt = "menu,menuone,noinsert,noselect",
+      }
+
+      opts.mapping = cmp.mapping.preset.insert(vim.tbl_deep_extend("force", opts.mapping, {
+        -- My config
+        ["<CR>"] = cmp.mapping.confirm({ select = false }), -- 'select = false' to only confirm explicitly selected item
+        ["<S-CR>"] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+        -- LazyVim defaults
+        ["<C-j>"] = cmp.mapping.select_next_item({ select = false, behavior = cmp.SelectBehavior.Select }),
+        ["<C-k>"] = cmp.mapping.select_prev_item({ select = false, behavior = cmp.SelectBehavior.Select }),
+      }))
+    end,
+  },
 
   -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = { "rafamadriz/friendly-snippets" },
-    config = function()
-      -- require("luasnip").filetype_extend("javascript", { "javascriptreact" })
-      -- require("luasnip").filetype_extend("javascript", { "html" })
-      -- require("luasnip").filetype_extend("javascript", { "typescriptreact" })
-      -- require("luasnip").filetype_extend("javascript", { "html" })
-
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end,
-    -- keys = function()
-    --   return {}
-    -- end,
-  },
+  -- {
+  --   "L3MON4D3/LuaSnip",
+  --   dependencies = { "rafamadriz/friendly-snippets" },
+  --   config = function()
+  --     -- require("luasnip").filetype_extend("javascript", { "javascriptreact" })
+  --     -- require("luasnip").filetype_extend("javascript", { "html" })
+  --     -- require("luasnip").filetype_extend("javascript", { "typescriptreact" })
+  --     -- require("luasnip").filetype_extend("javascript", { "html" })
+  --
+  --     require("luasnip.loaders.from_vscode").lazy_load()
+  --   end,
+  --   -- keys = function()
+  --   --   return {}
+  --   -- end,
+  -- },
   -- then: setup supertab in cmp
   -- {
   --   "hrsh7th/nvim-cmp",
@@ -136,9 +161,35 @@ return {
   --     })
   --   end,
   -- },
-  {
-    "folke/trouble.nvim",
-    -- opts will be merged with the parent spec
-    opts = { use_diagnostic_signs = true },
-  },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   ---@param opts cmp.ConfigSchema
+  --   opts = function(_, opts)
+  --     -- local luasnip = require("luasnip")
+  --     -- local cmp = require("cmp")
+  --
+  --     opts.formatting = {
+  --       formatting = {
+  --         format = function(entry, item)
+  --           local log = require("plenary.log").new({ plugin = "uthman", level = "debug" })
+  --
+  --           local icons = require("lazyvim.config").icons.kinds
+  --           if icons[item.kind] then
+  --             item.kind = icons[item.kind] .. item.kind
+  --           end
+  --
+  --           log.debug("entry", entry)
+  --           local i = entry:get_completion_item()
+  --           log.debug("i", i)
+  --
+  --           if i.detail then
+  --             item.menu = i.detail
+  --           end
+  --
+  --           return item
+  --         end,
+  --       },
+  --     }
+  --   end,
+  -- },
 }

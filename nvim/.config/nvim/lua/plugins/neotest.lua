@@ -32,8 +32,8 @@ return {
         opts.adapters,
         require("neotest-jest")({
           jestCommand = "npm test --",
-          jestConfigFile = "test/jest-e2e.json",
-          env = { CI = true },
+          -- jestConfigFile = "test/jest-e2e.json",
+          -- env = { CI = true },
           cwd = function()
             return vim.fn.getcwd()
           end,
