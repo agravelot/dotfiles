@@ -28,6 +28,7 @@
 	updateRefs = true
 [commit]
 	verbose = true
+	gpgsign = true
 [submodule]
 	fetchJobs = 8
 [diff]
