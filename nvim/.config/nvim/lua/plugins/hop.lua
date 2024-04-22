@@ -21,7 +21,18 @@ vim.api.nvim_set_keymap(
 )
 
 return {
-  "smoka7/hop.nvim",
-  version = "v2",
-  opts = {},
+  {
+    "smoka7/hop.nvim",
+    version = "v2",
+    opts = {},
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["<leader>h"] = { name = "+hop" },
+      },
+    },
+  },
 }
