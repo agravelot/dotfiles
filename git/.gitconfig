@@ -1,6 +1,7 @@
 [user]
 	name = Antoine GRAVELOT
 	email = antoine.gravelot@hotmail.fr
+	signingkey = /Users/agravelot/.ssh/id_ed25519.pub
 
 ; git@git.infra.kreactive.eu
 [includeIf "hasconfig:remote.*.url:git@git.infra.kreactive.eu:*/**"]
@@ -9,6 +10,15 @@
 [core]
 	autocrlf = input
   editor = nvim -f
+  core = pager
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  side-by-side = true
+[merge]
+  tool = diff3
+
 [color]
 	ui = auto 
 [branch]
@@ -34,6 +44,7 @@
 [diff]
 	compactionHeuristic = true
 	indentHeuristic = on
+  colorMoved = default
 [web]
 	browser = open
 [alias]
@@ -68,3 +79,5 @@
 	enabled = true
 [column]
 	ui = auto
+[gpg]
+	format = ssh
