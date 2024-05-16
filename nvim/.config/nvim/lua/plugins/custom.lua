@@ -42,7 +42,6 @@ return {
     opts = {
       -- auto_install = true,
       ensure_installed = {
-        "bash",
         "html",
         "json",
         "lua",
@@ -74,6 +73,12 @@ return {
         "shfmt",
         "flake8",
       })
+    end,
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    keys = function()
+      return {}
     end,
   },
   {
@@ -150,6 +155,10 @@ return {
               cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             end
             cmp.confirm()
+          -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+          -- this way you will only jump inside the snippet region
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           else
             fallback()
           end

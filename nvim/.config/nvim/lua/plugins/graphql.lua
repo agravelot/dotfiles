@@ -1,5 +1,4 @@
 return {
-
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -12,7 +11,6 @@ return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {
-      -- TODO Extend
       ---@type lspconfig.options
       servers = {
         graphql = {},

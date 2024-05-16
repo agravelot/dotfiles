@@ -82,6 +82,14 @@ return {
     end,
   },
   {
+    "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
+    opts = {
+      ---@type lspconfig.options
+      ensure_installed = {},
+    },
+  },
+  {
     "vuki656/package-info.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
     ft = "json",
@@ -96,7 +104,7 @@ return {
   {
     "dmmulroy/tsc.nvim",
     ft = { "typescript", "typescriptreact" },
-    opt = {
+    opts = {
       use_trouble_qflist = true,
       auto_start_watch_mode = true,
     },
@@ -107,7 +115,7 @@ return {
   {
     "dmmulroy/ts-error-translator.nvim",
     ft = { "typescript", "typescriptreact" },
-    opt = {},
+    -- opts = {},
     config = function(_, opts)
       require("ts-error-translator").setup(opts)
     end,
@@ -124,9 +132,14 @@ return {
         complete_function_calls = true,
         -- WARNING: Experimental feature also in VSCode, because it might hit performance of server.
         -- possible values: ("off"|"all"|"implementations_only"|"references_only")
-        -- code_lens = "on",
+        code_lens = "on",
         tsserver_format_options = {
           insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+        },
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = "all",
+          includeCompletionsForModuleExports = true,
+          quotePreference = "auto",
         },
         tsserver_plugins = {
           -- for TypeScript v4.9+
@@ -138,6 +151,10 @@ return {
       on_attach = function(client, buffer)
         require("workspace-diagnostics").populate_workspace_diagnostics(client, buffer)
       end,
+    },
+    keys = {
+      -- https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#custom-user-commands
+      { "<leader>cr", "<cmd>TSToolsOrganizeImports<cr>", desc = "Organize Imports" },
     },
   },
   -- keymap code actions

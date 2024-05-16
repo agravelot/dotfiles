@@ -1,5 +1,14 @@
 return {
   {
+    "williamboman/mason-lspconfig",
+    dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
+    opts = {
+      servers = {
+        gitlab_ci_ls = {},
+      },
+    },
+  },
+  {
     "harrisoncramer/gitlab.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",

@@ -1,5 +1,13 @@
 return {
   {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
+        "make",
+      })
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
@@ -11,19 +19,39 @@ return {
         "delve",
         "goimports-reviser",
         -- "goimports"
-        "golangci-lint-langserver",
+        -- "golangci-lint-langserver",
         "golangci-lint",
         "golines",
-        "gopls",
+        -- "gopls",
         "gotestsum",
-        "templ",
+        -- "templ",
+        -- "pbls",
 
         "html-lsp",
+        "fixjson",
+        "revive",
         "nginx-language-server",
         "sqlfluff",
         "yaml-language-server",
       })
     end,
+  },
+  -- Ensure mapping ok
+  {
+    "williamboman/mason-lspconfig",
+    dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
+    ---@class PluginLspOpts
+    opts = {
+      ensure_installed = {
+        "dotls",
+        "pbls",
+        "sqlls",
+        "templ",
+        "gopls",
+        "golangci_lint_ls",
+        "htmx",
+      },
+    },
   },
   {
     "ray-x/go.nvim",
