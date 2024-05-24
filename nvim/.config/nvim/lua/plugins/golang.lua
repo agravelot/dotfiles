@@ -4,8 +4,17 @@ return {
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "make",
+        "proto",
       })
     end,
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        proto = { "buf" },
+      },
+    },
   },
   {
     "williamboman/mason.nvim",
@@ -44,8 +53,9 @@ return {
     opts = {
       ensure_installed = {
         "dotls",
-        "pbls",
+        -- "pbls",
         "sqlls",
+        "bufls",
         "templ",
         "gopls",
         "golangci_lint_ls",
