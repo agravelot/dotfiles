@@ -3,13 +3,14 @@ return {
     "nvim-cmp",
     dependencies = { "hrsh7th/cmp-buffer", "davidsierradz/cmp-conventionalcommits" },
     opts = function(_, opts)
+      opts.sources = opts.sources or {}
       table.insert(opts.sources, { name = "conventionalcommits" })
-      -- table.insert(opts.sources, { name = "buffer" })
     end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
         "git_config",
         "git_rebase",
@@ -20,14 +21,15 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
         "gh",
         "actionlint",
         "commitlint",
         "gitlint",
-      },
-    },
+      })
+    end,
   },
   {
     "ThePrimeagen/git-worktree.nvim",

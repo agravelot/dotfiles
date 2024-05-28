@@ -1,12 +1,23 @@
 return {
+  -- {
+  --   "williamboman/mason-lspconfig",
+  --   dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
+  --   opts = {
+  --     servers = {
+  --       gitlab_ci_ls = {},
+  --     },
+  --   },
+  -- },
   {
     "williamboman/mason-lspconfig",
     dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
-    opts = {
-      servers = {
-        gitlab_ci_ls = {},
-      },
-    },
+    ---@class PluginLspOpts
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "gitlab_ci_ls",
+      })
+    end,
   },
   {
     "harrisoncramer/gitlab.nvim",

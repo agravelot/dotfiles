@@ -1,24 +1,8 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "make",
-        "proto",
-      })
-    end,
-  },
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        proto = { "buf" },
-      },
-    },
-  },
-  {
     "williamboman/mason.nvim",
     opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
         "blade-formatter",
         "css-lsp",
@@ -29,7 +13,7 @@ return {
         "goimports-reviser",
         -- "goimports"
         -- "golangci-lint-langserver",
-        "golangci-lint",
+        -- "golangci-lint",
         "golines",
         -- "gopls",
         "gotestsum",
@@ -50,18 +34,21 @@ return {
     "williamboman/mason-lspconfig",
     dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
     ---@class PluginLspOpts
-    opts = {
-      ensure_installed = {
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
         "dotls",
-        -- "pbls",
         "sqlls",
-        "bufls",
         "templ",
         "gopls",
         "golangci_lint_ls",
         "htmx",
-      },
-    },
+        "emmet_ls",
+        "taplo", -- toml
+        "yamlls",
+        "vacuum", -- openapi
+      })
+    end,
   },
   {
     "ray-x/go.nvim",

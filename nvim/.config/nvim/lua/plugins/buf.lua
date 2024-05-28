@@ -1,25 +1,30 @@
 return {
   {
-    "neovim/nvim-lspconfig",
-    -- TODO Extend
+    "williamboman/mason-lspconfig",
+    dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
+    ---@class PluginLspOpts
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "bufls",
+      })
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
     opts = {
-      servers = { bufls = {} },
+      formatters_by_ft = {
+        proto = { "buf" },
+      },
     },
   },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
+        "make",
         "proto",
-      })
-    end,
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "buf-language-server",
-        "buf",
       })
     end,
   },

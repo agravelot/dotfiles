@@ -39,9 +39,9 @@ return {
   -- add more treesitter parsers
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      -- auto_install = true,
-      ensure_installed = {
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
         "html",
         "json",
         "lua",
@@ -52,8 +52,8 @@ return {
         "regex",
         "vim",
         "yaml",
-      },
-    },
+      })
+    end,
   },
 
   -- use mini.starter instead of alpha
@@ -67,6 +67,7 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       -- add tsx and treesitter
+      opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
         "stylua",
         "shellcheck",
