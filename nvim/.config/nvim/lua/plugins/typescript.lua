@@ -49,10 +49,28 @@ return {
 
   -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
   -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
-  -- { import = "lazyvim.plugins.extras.lang.typescript" },
+  { import = "lazyvim.plugins.extras.lang.typescript" },
+  {
+    "yioneko/nvim-vtsls",
+    opts = {
+      settings = {
+        typescript = {
+          inlayHints = {
+            parameterNames = { enabled = "literals" },
+            parameterTypes = { enabled = true },
+            variableTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            enumMemberValues = { enabled = true },
+          },
+        },
+      },
+    },
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
         "html",
         "javascript",
@@ -78,16 +96,9 @@ return {
         "mdx-analyzer",
         "js-debug-adapter",
         "prettierd",
+        "vtsls",
       })
     end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      ensure_installed = {},
-    },
   },
   {
     "vuki656/package-info.nvim",
@@ -121,42 +132,42 @@ return {
     end,
   },
   -- { "artemave/workspace-diagnostics.nvim" },
-  {
-    "pmizio/typescript-tools.nvim",
-    -- enabled = false,
-    ft = { "typescript", "typescriptreact" },
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "pmizio/typescript-tools.nvim" },
-    opts = {
-      settings = {
-        expose_as_code_action = "all",
-        complete_function_calls = true,
-        -- WARNING: Experimental feature also in VSCode, because it might hit performance of server.
-        -- possible values: ("off"|"all"|"implementations_only"|"references_only")
-        code_lens = "on",
-        tsserver_format_options = {
-          insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
-        },
-        tsserver_file_preferences = {
-          includeInlayParameterNameHints = "all",
-          includeCompletionsForModuleExports = true,
-          quotePreference = "auto",
-        },
-        tsserver_plugins = {
-          -- for TypeScript v4.9+
-          -- "@styled/typescript-styled-plugin",
-          -- or for older TypeScript versions
-          -- "typescript-styled-plugin",
-        },
-      },
-      on_attach = function(client, buffer)
-        require("workspace-diagnostics").populate_workspace_diagnostics(client, buffer)
-      end,
-    },
-    keys = {
-      -- https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#custom-user-commands
-      { "<leader>cr", "<cmd>TSToolsOrganizeImports<cr>", desc = "Organize Imports" },
-    },
-  },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   -- enabled = false,
+  --   ft = { "typescript", "typescriptreact" },
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "pmizio/typescript-tools.nvim" },
+  --   opts = {
+  --     settings = {
+  --       expose_as_code_action = "all",
+  --       complete_function_calls = true,
+  --       -- WARNING: Experimental feature also in VSCode, because it might hit performance of server.
+  --       -- possible values: ("off"|"all"|"implementations_only"|"references_only")
+  --       code_lens = "on",
+  --       tsserver_format_options = {
+  --         insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+  --       },
+  --       tsserver_file_preferences = {
+  --         includeInlayParameterNameHints = "all",
+  --         includeCompletionsForModuleExports = true,
+  --         quotePreference = "auto",
+  --       },
+  --       tsserver_plugins = {
+  --         -- for TypeScript v4.9+
+  --         -- "@styled/typescript-styled-plugin",
+  --         -- or for older TypeScript versions
+  --         -- "typescript-styled-plugin",
+  --       },
+  --     },
+  --     on_attach = function(client, buffer)
+  --       require("workspace-diagnostics").populate_workspace_diagnostics(client, buffer)
+  --     end,
+  --   },
+  --   keys = {
+  --     -- https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#custom-user-commands
+  --     { "<leader>cr", "<cmd>TSToolsOrganizeImports<cr>", desc = "Organize Imports" },
+  --   },
+  -- },
   -- keymap code actions
   -- {
   --   "neovim/nvim-lspconfig",
@@ -203,58 +214,58 @@ return {
   --     },
   --   },
   -- },
-  {
-    "mfussenegger/nvim-dap",
-    optional = true,
-    dependencies = {
-      {
-        "williamboman/mason.nvim",
-        opts = function(_, opts)
-          opts.ensure_installed = opts.ensure_installed or {}
-          table.insert(opts.ensure_installed, "js-debug-adapter")
-        end,
-      },
-    },
-    opts = function()
-      local dap = require("dap")
-      if not dap.adapters["pwa-node"] then
-        require("dap").adapters["pwa-node"] = {
-          type = "server",
-          host = "localhost",
-          port = "${port}",
-          executable = {
-            command = "node",
-            -- 💀 Make sure to update this path to point to your installation
-            args = {
-              require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-                .. "/js-debug/src/dapDebugServer.js",
-              "${port}",
-            },
-          },
-        }
-      end
-      for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
-        if not dap.configurations[language] then
-          dap.configurations[language] = {
-            {
-              type = "pwa-node",
-              request = "launch",
-              name = "Launch file",
-              program = "${file}",
-              cwd = "${workspaceFolder}",
-            },
-            {
-              type = "pwa-node",
-              request = "attach",
-              name = "Attach",
-              processId = require("dap.utils").pick_process,
-              cwd = "${workspaceFolder}",
-            },
-          }
-        end
-      end
-    end,
-  },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   optional = true,
+  --   dependencies = {
+  --     {
+  --       "williamboman/mason.nvim",
+  --       opts = function(_, opts)
+  --         opts.ensure_installed = opts.ensure_installed or {}
+  --         table.insert(opts.ensure_installed, "js-debug-adapter")
+  --       end,
+  --     },
+  --   },
+  --   opts = function()
+  --     local dap = require("dap")
+  --     if not dap.adapters["pwa-node"] then
+  --       require("dap").adapters["pwa-node"] = {
+  --         type = "server",
+  --         host = "localhost",
+  --         port = "${port}",
+  --         executable = {
+  --           command = "node",
+  --           -- 💀 Make sure to update this path to point to your installation
+  --           args = {
+  --             require("mason-registry").get_package("js-debug-adapter"):get_install_path()
+  --               .. "/js-debug/src/dapDebugServer.js",
+  --             "${port}",
+  --           },
+  --         },
+  --       }
+  --     end
+  --     for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+  --       if not dap.configurations[language] then
+  --         dap.configurations[language] = {
+  --           {
+  --             type = "pwa-node",
+  --             request = "launch",
+  --             name = "Launch file",
+  --             program = "${file}",
+  --             cwd = "${workspaceFolder}",
+  --           },
+  --           {
+  --             type = "pwa-node",
+  --             request = "attach",
+  --             name = "Attach",
+  --             processId = require("dap.utils").pick_process,
+  --             cwd = "${workspaceFolder}",
+  --           },
+  --         }
+  --       end
+  --     end
+  --   end,
+  -- },
   -- Prettier in ESLint
   -- {
   --   "neovim/nvim-lspconfig",
