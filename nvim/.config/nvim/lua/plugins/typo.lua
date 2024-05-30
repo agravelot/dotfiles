@@ -9,5 +9,15 @@ return {
         "typos_lsp",
       })
     end,
+    config = function()
+      require("lspconfig").typos_lsp.setup({
+        -- cmd = { "typos-lsp" },
+        -- filetypes = { "markdown", "tex" },
+        -- root_dir = require("lspconfig").util.root_pattern(".git", ".git/", "package.json"),
+        init_options = {
+          diagnosticSeverity = "Hint",
+        },
+      })
+    end,
   },
 }
