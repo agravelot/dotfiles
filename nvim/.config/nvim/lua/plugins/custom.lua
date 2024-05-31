@@ -270,16 +270,14 @@ return {
     config = function()
       require("telescope").load_extension("smart_open")
     end,
-    opts = {
-      show_scores = true,
-    },
     keys = {
       {
         "<leader><leader>",
-        -- function()
-        --   require("telescope").extensions.smart_open.smart_open()
-        -- end,
-        "<cmd>Telescope smart_open<cr>",
+        function()
+          require("telescope").extensions.smart_open.smart_open({
+            cwd_only = true,
+          })
+        end,
         desc = "Smart Open",
       },
     },
