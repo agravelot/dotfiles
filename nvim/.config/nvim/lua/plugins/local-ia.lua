@@ -1,46 +1,73 @@
 return {
-  {
-    "David-Kunz/gen.nvim",
-    opts = {
-      model = "codestral", -- The default model to use.
-      -- model = "codeqwen", -- The default model to use.
-      -- model = "mistral", -- The default model to use.
-      host = "localhost", -- The host running the Ollama service.
-      port = "11434", -- The port on which the Ollama service is listening.
-      quit_map = "q", -- set keymap for close the response window
-      retry_map = "<c-r>", -- set keymap to re-send the current prompt
-      init = function(options)
-        pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
-      end,
-      -- Function to initialize Ollama
-      command = function(options)
-        local body = { model = options.model, stream = true }
-        return "curl --silent --no-buffer -X POST http://"
-          .. options.host
-          .. ":"
-          .. options.port
-          .. "/api/chat -d $body"
-      end,
-      -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
-      -- This can also be a command string.
-      -- The executed command must return a JSON object with { response, context }
-      -- (context property is optional).
-      -- list_models = '<omitted lua function>', -- Retrieves a list of model names
-      display_mode = "float", -- The display mode. Can be "float" or "split".
-      show_prompt = false, -- Shows the prompt submitted to Ollama.
-      show_model = false, -- Displays which model you are using at the beginning of your chat session.
-      no_auto_close = false, -- Never closes the window automatically.
-      debug = false, -- Prints errors and the command which is run.
-    },
-    keys = {
-      { "<leader>io", "<cmd>Gen<cr>", desc = "Open select", mode = { "n", "v" } },
-      { "<leader>ic", "<cmd>Gen Chat<cr>", desc = "Chat" },
-    },
-  },
+  -- {
+  --   "David-Kunz/gen.nvim",
+  --   opts = {
+  --     model = "codestral", -- The default model to use.
+  --     -- model = "codeqwen", -- The default model to use.
+  --     -- model = "mistral", -- The default model to use.
+  --     host = "localhost", -- The host running the Ollama service.
+  --     port = "11434", -- The port on which the Ollama service is listening.
+  --     quit_map = "q", -- set keymap for close the response window
+  --     retry_map = "<c-r>", -- set keymap to re-send the current prompt
+  --     init = function(options)
+  --       pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
+  --     end,
+  --     -- Function to initialize Ollama
+  --     command = function(options)
+  --       local body = { model = options.model, stream = true }
+  --       return "curl --silent --no-buffer -X POST http://"
+  --         .. options.host
+  --         .. ":"
+  --         .. options.port
+  --         .. "/api/chat -d $body"
+  --     end,
+  --     -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
+  --     -- This can also be a command string.
+  --     -- The executed command must return a JSON object with { response, context }
+  --     -- (context property is optional).
+  --     -- list_models = '<omitted lua function>', -- Retrieves a list of model names
+  --     display_mode = "float", -- The display mode. Can be "float" or "split".
+  --     show_prompt = false, -- Shows the prompt submitted to Ollama.
+  --     show_model = false, -- Displays which model you are using at the beginning of your chat session.
+  --     no_auto_close = false, -- Never closes the window automatically.
+  --     debug = false, -- Prints errors and the command which is run.
+  --   },
+  --   keys = {
+  --     { "<leader>io", "<cmd>Gen<cr>", desc = "Open select", mode = { "n", "v" } },
+  --     { "<leader>ic", "<cmd>Gen Chat<cr>", desc = "Chat" },
+  --   },
+  -- },
   {
     "folke/which-key.nvim",
     opts = function(_, opts)
       opts.defaults["<leader>i"] = { name = "+ai" }
     end,
   },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "llm-ls",
+      })
+    end,
+  },
+  -- {
+  --   "huggingface/llm.nvim",
+  --   opts = {
+  --     -- cf Setup
+  --     backend = "ollama",
+  --     -- model = "codestral",
+  --     model = "codeqwen",
+  --     url = "http://localhost:11434", -- llm-ls uses "/api/generate"
+  --     -- cf https://github.com/ollama/ollama/blob/main/docs/api.md#parameters
+  --     request_body = {
+  --       -- Modelfile options for the model you use
+  --       options = {
+  --         temperature = 0.2,
+  --         top_p = 0.95,
+  --       },
+  --     },
+  --   },
+  -- },
 }

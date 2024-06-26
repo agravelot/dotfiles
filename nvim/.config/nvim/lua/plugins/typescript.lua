@@ -49,19 +49,66 @@ return {
 
   -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
   -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
-  { import = "lazyvim.plugins.extras.lang.typescript" },
+  -- { import = "lazyvim.plugins.extras.lang.typescript" },
+  -- {
+  --   "yioneko/nvim-vtsls",
+  --   opts = {
+  --     refactor_auto_rename = true,
+  --     -- typescript.tsserver.pluginPaths = ["./node_modules"]
+  --     settings = {
+  --       typescript = {
+  --         tsdk = "node_modules/typescript/lib",
+  --         --   inlayHints = {
+  --         --     parameterNames = { enabled = "literals" },
+  --         --     parameterTypes = { enabled = true },
+  --         --     variableTypes = { enabled = true },
+  --         --     propertyDeclarationTypes = { enabled = true },
+  --         --     functionLikeReturnTypes = { enabled = true },
+  --         --     enumMemberValues = { enabled = true },
+  --         --   },
+  --       },
+  --     },
+  --   },
+  -- },
   {
-    "yioneko/nvim-vtsls",
+    "neovim/nvim-lspconfig",
     opts = {
-      settings = {
-        typescript = {
-          inlayHints = {
-            parameterNames = { enabled = "literals" },
-            parameterTypes = { enabled = true },
-            variableTypes = { enabled = true },
-            propertyDeclarationTypes = { enabled = true },
-            functionLikeReturnTypes = { enabled = true },
-            enumMemberValues = { enabled = true },
+      -- make sure mason installs the server
+      servers = {
+        -- tsserver = {
+        --   enabled = false,
+        -- },
+        vtsls = {
+          -- explicitly add default filetypes, so that we can extend
+          -- them in related extras
+          settings = {
+            vtsls = {
+              -- tsserver = {
+              experimental = {
+                enableProjectDiagnostics = true,
+              },
+              -- },
+
+              --   enableMoveToFileCodeAction = true,
+              --   autoUseWorkspaceTsdk = true,
+              --   experimental = {
+              --     completion = {
+              --       enableServerSideFuzzyMatch = true,
+              --     },
+              --   },
+            },
+            typescript = {
+              tsdk = "node_modules/typescript/lib",
+              suggest = {
+                includeAutomaticOptionalChainCompletions = true,
+              },
+              --  typescript.tsserver.experimental.enableProjectDiagnostics
+              tsserver = {
+                experimental = {
+                  enableProjectDiagnostics = true,
+                },
+              },
+            },
           },
         },
       },
