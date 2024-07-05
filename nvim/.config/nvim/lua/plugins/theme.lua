@@ -3,7 +3,8 @@ return {
   -- { "ellisonleao/gruvbox.nvim" },
   {
     "folke/tokyonight.nvim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     opts = {
       style = "night",
       styles = {
@@ -17,6 +18,10 @@ return {
         sidebars = "dark", -- style for sidebars, see below
         floats = "dark", -- style for floating windows
       },
+      -- on_colors = function(colors)
+      --   colors.hint = colors.orange
+      --   colors.error = "#ff0000"
+      -- end,
     },
   },
   -- {
@@ -35,46 +40,46 @@ return {
   --       light = "latte",
   --       dark = "mocha",
   --     },
-  --     transparent_background = false, -- disables setting the background color.
-  --     show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-  --     term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
-  --     dim_inactive = {
-  --       enabled = false, -- dims the background color of inactive window
-  --       shade = "dark",
-  --       percentage = 0.15, -- percentage of the shade to apply to the inactive window
+  --   transparent_background = false, -- disables setting the background color.
+  --   show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+  --   term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+  --   dim_inactive = {
+  --     enabled = false, -- dims the background color of inactive window
+  --     shade = "dark",
+  --     percentage = 0.15, -- percentage of the shade to apply to the inactive window
+  --   },
+  --   no_italic = false, -- Force no italic
+  --   no_bold = false, -- Force no bold
+  --   no_underline = false, -- Force no underline
+  --   styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+  --     comments = { "italic" }, -- Change the style of comments
+  --     conditionals = { "italic" },
+  --     loops = {},
+  --     functions = {},
+  --     keywords = {},
+  --     strings = {},
+  --     variables = {},
+  --     numbers = {},
+  --     booleans = {},
+  --     properties = {},
+  --     types = {},
+  --     operators = {},
+  --     -- miscs = {}, -- Uncomment to turn off hard-coded styles
+  --   },
+  --   color_overrides = {},
+  --   custom_highlights = {},
+  --   default_integrations = true,
+  --   integrations = {
+  --     cmp = true,
+  --     gitsigns = true,
+  --     nvimtree = true,
+  --     treesitter = true,
+  --     notify = false,
+  --     mini = {
+  --       enabled = true,
+  --       indentscope_color = "",
   --     },
-  --     no_italic = false, -- Force no italic
-  --     no_bold = false, -- Force no bold
-  --     no_underline = false, -- Force no underline
-  --     styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-  --       comments = { "italic" }, -- Change the style of comments
-  --       conditionals = { "italic" },
-  --       loops = {},
-  --       functions = {},
-  --       keywords = {},
-  --       strings = {},
-  --       variables = {},
-  --       numbers = {},
-  --       booleans = {},
-  --       properties = {},
-  --       types = {},
-  --       operators = {},
-  --       -- miscs = {}, -- Uncomment to turn off hard-coded styles
-  --     },
-  --     color_overrides = {},
-  --     custom_highlights = {},
-  --     default_integrations = true,
-  --     integrations = {
-  --       cmp = true,
-  --       gitsigns = true,
-  --       nvimtree = true,
-  --       treesitter = true,
-  --       notify = false,
-  --       mini = {
-  --         enabled = true,
-  --         indentscope_color = "",
-  --       },
-  --     },
+  --   },
   --   },
   -- },
   -- {
@@ -153,77 +158,125 @@ return {
       -- colorscheme = "solarized-osaka",
       -- colorscheme = "catppuccin-mocha",
       -- colorscheme = "kanagawa-wave",
-      -- colorscheme = "kanagawa-dragon",
-      -- colorscheme = "onedark",
-      -- colorscheme = "tokyonight",
+      -- colorscheme = "catppuccin",
+      -- colorscheme = "monokai-nightasty",
+      colorscheme = "tokyonight-night",
       -- colorscheme = "gruvbox",
       -- colorscheme = "cyberdream",
-      colorscheme = "flexoki-dark",
+      -- colorscheme = "flexoki-dark",
+      -- colorscheme = "rose-pine",
     },
   },
+  { "rose-pine/neovim", name = "rose-pine" },
+  -- {
+  --   "nvim-cmp",
+  --   opts = {
+  --     window = {
+  --       completion = {
+  --         border = "rounded",
+  --         winhighlight = "Normal:CmpNormal",
+  --       },
+  --       documentation = {
+  --         winhighlight = "Normal:CmpDocNormal",
+  --       },
+  --     },
+  --   },
+  -- },
   -- add dracula
+  -- {
+  --   "tokyonight.nvim",
+  --   opts = {
+  -- transparent = true,
+  -- styles = {
+  -- sidebars = "transparent",
+  -- floats = "transparent",
+  -- },
+  --   },
+  -- },
+  -- {
+  --   "scottmckendry/cyberdream.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {
+  --     -- transparent = true,
+  --     italic_comments = true,
+  --     -- TODO italic comment and bold function
+  --     theme = {
+  --       highlights = {
+  --         -- Highlight groups to override, adding new groups is also possible
+  --         -- See `:h highlight-groups` for a list of highlight groups or run `:hi` to see all groups and their current values
+  --
+  --         -- Example:
+  --         Comment = { italic = true },
+  --         Keyword = { italic = true },
+  --
+  --         -- Complete list can be found in `lua/cyberdream/theme.lua`
+  --       },
+  --     },
+  --   },
+  -- },
+  -- {
+  --   "ellisonleao/gruvbox.nvim",
+  --   priority = 1000,
+  --   config = true,
+  --   opts = {
+  --     terminal_colors = true, -- add neovim terminal colors
+  --     undercurl = true,
+  --     underline = true,
+  --     bold = true,
+  --     italic = {
+  --       strings = true,
+  --       emphasis = true,
+  --       comments = true,
+  --       operators = false,
+  --       folds = true,
+  --     },
+  --     strikethrough = true,
+  --     invert_selection = false,
+  --     invert_signs = false,
+  --     invert_tabline = false,
+  --     invert_intend_guides = false,
+  --     inverse = true, -- invert background for search, diffs, statuslines and errors
+  --     contrast = "hard", -- can be "hard", "soft" or empty string
+  --     palette_overrides = {},
+  --     overrides = {},
+  --     dim_inactive = false,
+  --     -- transparent_mode = true,
+  --   },
+  -- },
+  -- {
+  --   "olimorris/onedarkpro.nvim",
+  --   priority = 1000, -- Ensure it loads first
+  -- },
   {
-    "tokyonight.nvim",
+    "kepano/flexoki-neovim",
+    name = "flexoki",
+    -- opts = function(opts)
+    --   opts.highlight_groups.Pmenu.blen = 0
+    -- end,
     opts = {
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
-    },
-  },
-  {
-    "scottmckendry/cyberdream.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      transparent = true,
-      italic_comments = true,
-      -- TODO italic comment and bold function
-      theme = {
-        highlights = {
-          -- Highlight groups to override, adding new groups is also possible
-          -- See `:h highlight-groups` for a list of highlight groups or run `:hi` to see all groups and their current values
-
-          -- Example:
-          Comment = { italic = true },
-          Keyword = { italic = true },
-
-          -- Complete list can be found in `lua/cyberdream/theme.lua`
+      colorscheme = {
+        highlight_groups = {
+          -- ["Pmenu"] = { fg = "#C5CDD9", bg = "#22252A", blend = 0 },
+          ["Pmenu"] = { fg = "#FFCDD9", bg = "#44252A", blend = 0 },
         },
       },
-    },
-  },
-  {
-    "ellisonleao/gruvbox.nvim",
-    priority = 1000,
-    config = true,
-    opts = {
-      terminal_colors = true, -- add neovim terminal colors
-      undercurl = true,
-      underline = true,
-      bold = true,
-      italic = {
-        strings = true,
-        emphasis = true,
-        comments = true,
-        operators = false,
-        folds = true,
+      highlight_groups = {
+        -- ["Pmenu"] = { fg = "#C5CDD9", bg = "#22252A", blend = 0 },
+        Pmenu = { fg = "#FFCDD9", bg = "#FF252A", blend = 0 },
       },
-      strikethrough = true,
-      invert_selection = false,
-      invert_signs = false,
-      invert_tabline = false,
-      invert_intend_guides = false,
-      inverse = true, -- invert background for search, diffs, statuslines and errors
-      contrast = "hard", -- can be "hard", "soft" or empty string
-      palette_overrides = {},
-      overrides = {},
-      dim_inactive = false,
-      transparent_mode = true,
+
+      highlight = {
+        Pmenu = { blend = 0 },
+      },
     },
+    -- config = function()
+    --   vim.api.nvim_set_hl(0, "Pmenu", { blend = 1 })
+    -- end,
+    -- config = function()
+    --   vim.api.nvim_set_hl(0, "Pmenu", { blend = 1 })
+    -- end,
   },
-  { "kepano/flexoki-neovim", name = "flexoki" },
   --
   -- {
   --   "Mofiqul/dracula.nvim",

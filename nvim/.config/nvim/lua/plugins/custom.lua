@@ -82,91 +82,91 @@ return {
       return {}
     end,
   },
-  {
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      local cmp = require("cmp")
-
-      -- opts.mapping = vim.mapping("force", opts.mapping, { ["<CR>"] = nil })
-
-      opts.preselect = cmp.PreselectMode.None
-      opts.completion = {
-        completeopt = "menu,menuone,noinsert,noselect",
-      }
-
-      local luasnip = require("luasnip")
-      opts.mapping = cmp.mapping.preset.insert(vim.tbl_deep_extend("force", opts.mapping, {
-
-        -- Select the [n]ext item
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        -- Select the [p]revious item
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-
-        -- Scroll the documentation window [b]ack / [f]orward
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-
-        -- Accept ([y]es) the completion.
-        --  This will auto-import if your LSP supports it.
-        --  This will expand snippets if the LSP sent a snippet.
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-
-        -- Manually trigger a completion from nvim-cmp.
-        --  Generally you don't need this, because nvim-cmp will display
-        --  completions whenever it has completion options available.
-        ["<C-Space>"] = cmp.mapping.complete({}),
-
-        -- Think of <c-l> as moving to the right of your snippet expansion.
-        --  So if you have a snippet that's like:
-        --  function $name($args)
-        --    $body
-        --  end
-        --
-        -- <c-l> will move you to the right of each of the expansion locations.
-        -- <c-h> is similar, except moving you backwards.
-        ["<C-l>"] = cmp.mapping(function()
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          end
-        end, { "i", "s" }),
-        ["<C-h>"] = cmp.mapping(function()
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          end
-        end, { "i", "s" }),
-
-        -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-        ["<CR>"] = cmp.mapping({
-          i = function(fallback)
-            if cmp.visible() and cmp.get_active_entry() then
-              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-            else
-              fallback()
-            end
-          end,
-          s = cmp.mapping.confirm({ select = true }),
-          c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-        }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-          if cmp.visible() then
-            local entry = cmp.get_selected_entry()
-            if not entry then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            end
-            cmp.confirm()
-          -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-          -- this way you will only jump inside the snippet region
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, { "i", "s", "c" }),
-      }))
-    end,
-  },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   opts = function(_, opts)
+  --     local cmp = require("cmp")
+  --
+  --     -- opts.mapping = vim.mapping("force", opts.mapping, { ["<CR>"] = nil })
+  --
+  --     opts.preselect = cmp.PreselectMode.None
+  --     opts.completion = {
+  --       completeopt = "menu,menuone,noinsert,noselect",
+  --     }
+  --
+  --     local luasnip = require("luasnip")
+  --     opts.mapping = cmp.mapping.preset.insert(vim.tbl_deep_extend("force", opts.mapping, {
+  --
+  --       -- Select the [n]ext item
+  --       ["<C-n>"] = cmp.mapping.select_next_item(),
+  --       -- Select the [p]revious item
+  --       ["<C-p>"] = cmp.mapping.select_prev_item(),
+  --
+  --       -- Scroll the documentation window [b]ack / [f]orward
+  --       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+  --       ["<C-f>"] = cmp.mapping.scroll_docs(4),
+  --
+  --       -- Accept ([y]es) the completion.
+  --       --  This will auto-import if your LSP supports it.
+  --       --  This will expand snippets if the LSP sent a snippet.
+  --       ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+  --
+  --       -- Manually trigger a completion from nvim-cmp.
+  --       --  Generally you don't need this, because nvim-cmp will display
+  --       --  completions whenever it has completion options available.
+  --       ["<C-Space>"] = cmp.mapping.complete({}),
+  --
+  --       -- Think of <c-l> as moving to the right of your snippet expansion.
+  --       --  So if you have a snippet that's like:
+  --       --  function $name($args)
+  --       --    $body
+  --       --  end
+  --       --
+  --       -- <c-l> will move you to the right of each of the expansion locations.
+  --       -- <c-h> is similar, except moving you backwards.
+  --       ["<C-l>"] = cmp.mapping(function()
+  --         if luasnip.expand_or_locally_jumpable() then
+  --           luasnip.expand_or_jump()
+  --         end
+  --       end, { "i", "s" }),
+  --       ["<C-h>"] = cmp.mapping(function()
+  --         if luasnip.locally_jumpable(-1) then
+  --           luasnip.jump(-1)
+  --         end
+  --       end, { "i", "s" }),
+  --
+  --       -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+  --       --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+  --       ["<CR>"] = cmp.mapping({
+  --         i = function(fallback)
+  --           if cmp.visible() and cmp.get_active_entry() then
+  --             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+  --           else
+  --             fallback()
+  --           end
+  --         end,
+  --         s = cmp.mapping.confirm({ select = true }),
+  --         c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+  --       }),
+  --       ["<Tab>"] = cmp.mapping(function(fallback)
+  --         -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+  --         if cmp.visible() then
+  --           local entry = cmp.get_selected_entry()
+  --           if not entry then
+  --             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+  --           end
+  --           cmp.confirm()
+  --         -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+  --         -- this way you will only jump inside the snippet region
+  --         elseif luasnip.expand_or_jumpable() then
+  --           luasnip.expand_or_jump()
+  --         else
+  --           fallback()
+  --         end
+  --       end, { "i", "s", "c" }),
+  --     }))
+  --   end,
+  -- },
 
   -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
@@ -290,4 +290,191 @@ return {
   --     { "nvim-telescope/telescope-fzy-native.nvim" },
   --   },
   -- },
+  --
+  --
+  --
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   ---@param opts cmp.ConfigSchema
+  --   opts = function(_, opts)
+  --     local has_words_before = function()
+  --       unpack = unpack or table.unpack
+  --       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  --       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  --     end
+  --
+  --     local cmp = require("cmp")
+  --
+  --     opts.mapping = vim.tbl_extend("force", opts.mapping, {
+  --       ["<Tab>"] = cmp.mapping(function(fallback)
+  --         if cmp.visible() then
+  --           -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+  --           cmp.select_next_item()
+  --         elseif vim.snippet.active({ direction = 1 }) then
+  --           vim.schedule(function()
+  --             vim.snippet.jump(1)
+  --           end)
+  --         elseif has_words_before() then
+  --           cmp.complete()
+  --         else
+  --           fallback()
+  --         end
+  --       end, { "i", "s" }),
+  --       ["<S-Tab>"] = cmp.mapping(function(fallback)
+  --         if cmp.visible() then
+  --           cmp.select_prev_item()
+  --         elseif vim.snippet.active({ direction = -1 }) then
+  --           vim.schedule(function()
+  --             vim.snippet.jump(-1)
+  --           end)
+  --         else
+  --           fallback()
+  --         end
+  --       end, { "i", "s" }),
+  --     })
+  --   end,
+  -- },
+  {
+    "hrsh7th/nvim-cmp",
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+
+      local cmp = require("cmp")
+
+      opts.mapping["<CR>"] = function(fallback)
+        cmp.abort()
+        fallback()
+      end
+
+      opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+          -- cmp.select_next_item()
+          cmp.confirm({ select = true })
+        elseif vim.snippet.active({ direction = 1 }) then
+          vim.schedule(function()
+            vim.snippet.jump(1)
+          end)
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end, { "i", "s" })
+
+      opts.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif vim.snippet.active({ direction = -1 }) then
+          vim.schedule(function()
+            vim.snippet.jump(-1)
+          end)
+        else
+          fallback()
+        end
+      end, { "i", "s" })
+    end,
+  },
+  {
+    "rmagatti/goto-preview",
+    event = "BufEnter",
+    config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
+    keys = {
+      -- nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
+      -- nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
+      -- nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
+      -- nnoremap gpD <cmd>lua require('goto-preview').goto_preview_declaration()<CR>
+      -- nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
+      -- nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
+      {
+        "<leader>cpd",
+        function()
+          require("goto-preview").goto_preview_definition()
+        end,
+        desc = "Goto Preview",
+      },
+      {
+        "<leader>cpt",
+        function()
+          require("goto-preview").goto_preview_type_definition()
+        end,
+        desc = "Goto Preview Type Definition",
+      },
+      {
+        "<leader>cpi",
+        function()
+          require("goto-preview").goto_preview_implementation()
+        end,
+        desc = "Goto Preview Implementation",
+      },
+      {
+        "<leader>cpD",
+        function()
+          require("goto-preview").goto_preview_declaration()
+        end,
+        desc = "Goto Preview Declaration",
+      },
+      {
+        "<leader>cpc",
+        function()
+          require("goto-preview").close_all_win()
+        end,
+        desc = "Close Preview",
+      },
+      {
+        "<leader>cpr",
+        function()
+          require("goto-preview").goto_preview_references()
+        end,
+        desc = "Goto Preview References",
+      },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["<leader>cp"] = { name = "+preview" },
+      },
+    },
+  },
+  -- support todo without ":"
+  {
+    "folke/todo-comments.nvim",
+    event = "VeryLazy",
+    opts = {
+      highlight = {
+        pattern = [[.*<(KEYWORDS)\s*]],
+        after = "fg ",
+      },
+      search = {
+        pattern = [[\b(KEYWORDS)\b]],
+      },
+    },
+  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     codelens = {
+  --       enabled = true,
+  --     },
+  --   },
+  -- },
+  {
+    "OXY2DEV/markview.nvim",
+
+    dependencies = {
+      -- You may not need this if you don't lazy load
+      -- Or if the parsers are in your $RUNTIMEPATH
+      "nvim-treesitter/nvim-treesitter",
+
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
 }

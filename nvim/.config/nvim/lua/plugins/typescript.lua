@@ -71,6 +71,10 @@ return {
   --   },
   -- },
   {
+    "nvimtools/none-ls.nvim",
+    enable = false,
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       -- make sure mason installs the server
@@ -86,6 +90,7 @@ return {
               -- tsserver = {
               experimental = {
                 enableProjectDiagnostics = true,
+                maxInlayHintLength = 30,
               },
               -- },
 

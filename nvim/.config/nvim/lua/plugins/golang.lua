@@ -1,55 +1,166 @@
 return {
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "blade-formatter",
+        "css-lsp",
+        "diagnostic-languageserver",
+
+        "gofumpt",
+        "delve",
+        "goimports-reviser",
+        -- "goimports"
+        -- "golangci-lint-langserver",
+        -- "golangci-lint",
+        "golines",
+        -- "gopls",
+        "gotestsum",
+        -- "templ",
+        -- "pbls",
+
+        "html-lsp",
+        "fixjson",
+        "revive",
+        "nginx-language-server",
+        "sqlfluff",
+        "yaml-language-server",
+      })
+    end,
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = { ensure_installed = { "gomodifytags", "impl", "golangci-lint", "revive" } },
+      },
+    },
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        nls.builtins.diagnostics.golangci_lint,
+        nls.builtins.diagnostics.revive,
+      })
+    end,
+  },
+  -- Disable duplicate with null-ls
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        -- go = { "goimports", "gofumpt" },
+        go = {},
+      },
+    },
+  },
   -- {
-  --   "williamboman/mason.nvim",
-  --   opts = function(_, opts)
-  --     opts.ensure_installed = opts.ensure_installed or {}
-  --     vim.list_extend(opts.ensure_installed, {
-  --       "blade-formatter",
-  --       "css-lsp",
-  --       "diagnostic-languageserver",
-  --
-  --       "gofumpt",
-  --       "delve",
-  --       "goimports-reviser",
-  --       -- "goimports"
-  --       -- "golangci-lint-langserver",
-  --       -- "golangci-lint",
-  --       "golines",
-  --       -- "gopls",
-  --       "gotestsum",
-  --       -- "templ",
-  --       -- "pbls",
-  --
-  --       "html-lsp",
-  --       "fixjson",
-  --       "revive",
-  --       "nginx-language-server",
-  --       "sqlfluff",
-  --       "yaml-language-server",
-  --     })
-  --   end,
+  --   "mfussenegger/nvim-lint",
+  --   opts = {
+  --     linter_by_ft = {
+  --       go = { "golangci_lint", "revive" },
+  --     },
+  --   },
   -- },
-  -- Ensure mapping ok
-  -- {
-  --   "williamboman/mason-lspconfig",
-  --   dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
-  --   ---@class PluginLspOpts
-  --   opts = function(_, opts)
-  --     opts.ensure_installed = opts.ensure_installed or {}
-  --     vim.list_extend(opts.ensure_installed, {
-  --       "dotls",
-  --       "sqlls",
-  --       "templ",
-  --       -- "gopls",
-  --       "golangci_lint_ls",
-  --       "htmx",
-  --       "emmet_ls",
-  --       "taplo", -- toml
-  --       "yamlls",
-  --       "vacuum", -- openapi
-  --     })
-  --   end,
-  -- },
+  {
+    "williamboman/mason-lspconfig",
+    dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
+    -- ft = { "go", "gomod" },
+    ---@class PluginLspOpts
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "dotls",
+        "sqlls",
+        "templ",
+        -- "gopls",
+        "golangci_lint_ls",
+        "htmx",
+        "emmet_ls",
+        "taplo", -- toml
+        "yamlls",
+        "vacuum", -- openapi
+      })
+
+      -- opts.servers.gopls.settings.gopls = {
+      --   lintTool = "golangci-lint",
+      --   analyses = {
+      --     unusedparams = true,
+      --     shadow = true,
+      --   },
+      --   staticcheck = true,
+      -- }
+    end,
+    -- config = function()
+    --   local configs = require("lspconfig/configs")
+    --   configs.gopls = {
+    --     default_config = {
+    --       cmd = { "gopls" },
+    --       root_dir = require("lspconfig/util").root_pattern("go.mod", ".git"),
+    --       settings = {
+    --         gopls = {
+    --           analyses = {
+    --             unusedparams = true,
+    --             shadow = true,
+    --           },
+    --           staticcheck = true,
+    --         },
+    --       },
+    --     },
+    --   }
+    -- end,
+    -- golang lint ci
+    -- config = function()
+    --   local configs = require("lspconfig/configs")
+    --   local lspconfig = require("lspconfig")
+    --
+    --   if not configs.golangcilsp then
+    --     configs.golangcilsp = {
+    --       default_config = {
+    --         cmd = { "golangci-lint-langserver" },
+    --         root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
+    --         init_options = {
+    --           command = {
+    --             "golangci-lint",
+    --             "run",
+    --             "--enable-all",
+    --             "--disable",
+    --             "lll",
+    --             "--out-format",
+    --             "json",
+    --             "--issues-exit-code=1",
+    --           },
+    --         },
+    --       },
+    --     }
+    --   end
+    --   lspconfig.golangci_lint_ls.setup({
+    --     filetypes = { "go", "gomod" },
+    --   })
+    --   -- lspconfig.golangci_lint_ls.setup({
+    --   --   -- default_config = {
+    --   --   cmd = { "golangci-lint-langserver" },
+    --   --   root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
+    --   --   init_options = {
+    --   --     command = {
+    --   --       "golangci-lint",
+    --   --       "run",
+    --   --       "--enable-all",
+    --   --       "--disable",
+    --   --       "lll",
+    --   --       "--out-format",
+    --   --       "json",
+    --   --       "--issues-exit-code=1",
+    --   --     },
+    --   --   },
+    --   --   -- },
+    --   --   -- Server-specific settings. See `:help lspconfig-setup`
+    --   -- })
+    -- end,
+  },
   -- {
   --   "ray-x/go.nvim",
   --   dependencies = { -- optional packages
@@ -91,167 +202,167 @@ return {
   --   },
   -- },
 
-  {
-    "nvim-neotest/neotest",
-    dependencies = {
-      -- "nvim-neotest/neotest-go",
-      -- golang
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "fredrikaverpil/neotest-golang", -- Installation
-    },
-    ft = { "go", "gomod" },
-    -- keys = {
-    --   {
-    --     "<leader>tl",
-    --     function()
-    --       require("neotest").run.run_last()
-    --     end,
-    --     desc = "Run Last Test",
-    --   },
-    --   {
-    --     "<leader>tL",
-    --     function()
-    --       require("neotest").run.run_last({ strategy = "dap" })
-    --     end,
-    --     desc = "Debug Last Test",
-    --   },
-    --   {
-    --     "<leader>tw",
-    --     "<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>",
-    --     desc = "Run Watch",
-    --   },
-    -- },
-    opts = function(_, opts)
-      opts.adapters = opts.adapters or {}
-      table.insert(opts.adapters, require("neotest-golang"))
-      opts.adapters["neotest-golang"] = {
-        go_test_args = {
-          "-v",
-          "-race",
-          "-count=1",
-          "-timeout=60s",
-          "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
-        },
-        dap_go_enabled = true,
-      }
-      -- table.insert(
-      --   opts.adapters,
-      --   require("neotest-go")({
-      --     experimentral = {
-      --       test_table = true,
-      --     },
-      --   })
-      -- )
-    end,
-    config = function(_, opts)
-      if opts.adapters then
-        local adapters = {}
-        for name, config in pairs(opts.adapters or {}) do
-          if type(name) == "number" then
-            if type(config) == "string" then
-              config = require(config)
-            end
-            adapters[#adapters + 1] = config
-          elseif config ~= false then
-            local adapter = require(name)
-            if type(config) == "table" and not vim.tbl_isempty(config) then
-              local meta = getmetatable(adapter)
-              if adapter.setup then
-                adapter.setup(config)
-              elseif meta and meta.__call then
-                adapter(config)
-              else
-                error("Adapter " .. name .. " does not support setup")
-              end
-            end
-            adapters[#adapters + 1] = adapter
-          end
-        end
-        opts.adapters = adapters
-      end
-
-      require("neotest").setup(opts)
-    end,
-    keys = {
-      {
-        "<leader>ta",
-        function()
-          require("neotest").run.attach()
-        end,
-        desc = "[t]est [a]ttach",
-      },
-      {
-        "<leader>tf",
-        function()
-          require("neotest").run.run(vim.fn.expand("%"))
-        end,
-        desc = "[t]est run [f]ile",
-      },
-      {
-        "<leader>tA",
-        function()
-          require("neotest").run.run(vim.uv.cwd())
-        end,
-        desc = "[t]est [A]ll files",
-      },
-      {
-        "<leader>tS",
-        function()
-          require("neotest").run.run({ suite = true })
-        end,
-        desc = "[t]est [S]uite",
-      },
-      {
-        "<leader>tn",
-        function()
-          require("neotest").run.run()
-        end,
-        desc = "[t]est [n]earest",
-      },
-      {
-        "<leader>tl",
-        function()
-          require("neotest").run.run_last()
-        end,
-        desc = "[t]est [l]ast",
-      },
-      {
-        "<leader>ts",
-        function()
-          require("neotest").summary.toggle()
-        end,
-        desc = "[t]est [s]ummary",
-      },
-      {
-        "<leader>to",
-        function()
-          require("neotest").output.open({ enter = true, auto_close = true })
-        end,
-        desc = "[t]est [o]utput",
-      },
-      {
-        "<leader>tO",
-        function()
-          require("neotest").output_panel.toggle()
-        end,
-        desc = "[t]est [O]utput panel",
-      },
-      {
-        "<leader>tt",
-        function()
-          require("neotest").run.stop()
-        end,
-        desc = "[t]est [t]erminate",
-      },
-      {
-        "<leader>td",
-        function()
-          require("neotest").run.run({ suite = false, strategy = "dap" })
-        end,
-        desc = "Debug nearest test",
-      },
-    },
-  },
+  -- {
+  --   "nvim-neotest/neotest",
+  --   dependencies = {
+  --     -- "nvim-neotest/neotest-go",
+  --     -- golang
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "antoinemadec/FixCursorHold.nvim",
+  --     "fredrikaverpil/neotest-golang", -- Installation
+  --   },
+  --   ft = { "go", "gomod" },
+  --   -- keys = {
+  --   --   {
+  --   --     "<leader>tl",
+  --   --     function()
+  --   --       require("neotest").run.run_last()
+  --   --     end,
+  --   --     desc = "Run Last Test",
+  --   --   },
+  --   --   {
+  --   --     "<leader>tL",
+  --   --     function()
+  --   --       require("neotest").run.run_last({ strategy = "dap" })
+  --   --     end,
+  --   --     desc = "Debug Last Test",
+  --   --   },
+  --   --   {
+  --   --     "<leader>tw",
+  --   --     "<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>",
+  --   --     desc = "Run Watch",
+  --   --   },
+  --   -- },
+  --   opts = function(_, opts)
+  --     opts.adapters = opts.adapters or {}
+  --     table.insert(opts.adapters, require("neotest-golang"))
+  --     opts.adapters["neotest-golang"] = {
+  --       go_test_args = {
+  --         "-v",
+  --         "-race",
+  --         "-count=1",
+  --         "-timeout=60s",
+  --         "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
+  --       },
+  --       dap_go_enabled = true,
+  --     }
+  --     -- table.insert(
+  --     --   opts.adapters,
+  --     --   require("neotest-go")({
+  --     --     experimentral = {
+  --     --       test_table = true,
+  --     --     },
+  --     --   })
+  --     -- )
+  --   end,
+  --   config = function(_, opts)
+  --     if opts.adapters then
+  --       local adapters = {}
+  --       for name, config in pairs(opts.adapters or {}) do
+  --         if type(name) == "number" then
+  --           if type(config) == "string" then
+  --             config = require(config)
+  --           end
+  --           adapters[#adapters + 1] = config
+  --         elseif config ~= false then
+  --           local adapter = require(name)
+  --           if type(config) == "table" and not vim.tbl_isempty(config) then
+  --             local meta = getmetatable(adapter)
+  --             if adapter.setup then
+  --               adapter.setup(config)
+  --             elseif meta and meta.__call then
+  --               adapter(config)
+  --             else
+  --               error("Adapter " .. name .. " does not support setup")
+  --             end
+  --           end
+  --           adapters[#adapters + 1] = adapter
+  --         end
+  --       end
+  --       opts.adapters = adapters
+  --     end
+  --
+  --     require("neotest").setup(opts)
+  --   end,
+  --   keys = {
+  --     {
+  --       "<leader>ta",
+  --       function()
+  --         require("neotest").run.attach()
+  --       end,
+  --       desc = "[t]est [a]ttach",
+  --     },
+  --     {
+  --       "<leader>tf",
+  --       function()
+  --         require("neotest").run.run(vim.fn.expand("%"))
+  --       end,
+  --       desc = "[t]est run [f]ile",
+  --     },
+  --     {
+  --       "<leader>tA",
+  --       function()
+  --         require("neotest").run.run(vim.uv.cwd())
+  --       end,
+  --       desc = "[t]est [A]ll files",
+  --     },
+  --     {
+  --       "<leader>tS",
+  --       function()
+  --         require("neotest").run.run({ suite = true })
+  --       end,
+  --       desc = "[t]est [S]uite",
+  --     },
+  --     {
+  --       "<leader>tn",
+  --       function()
+  --         require("neotest").run.run()
+  --       end,
+  --       desc = "[t]est [n]earest",
+  --     },
+  --     {
+  --       "<leader>tl",
+  --       function()
+  --         require("neotest").run.run_last()
+  --       end,
+  --       desc = "[t]est [l]ast",
+  --     },
+  --     {
+  --       "<leader>ts",
+  --       function()
+  --         require("neotest").summary.toggle()
+  --       end,
+  --       desc = "[t]est [s]ummary",
+  --     },
+  --     {
+  --       "<leader>to",
+  --       function()
+  --         require("neotest").output.open({ enter = true, auto_close = true })
+  --       end,
+  --       desc = "[t]est [o]utput",
+  --     },
+  --     {
+  --       "<leader>tO",
+  --       function()
+  --         require("neotest").output_panel.toggle()
+  --       end,
+  --       desc = "[t]est [O]utput panel",
+  --     },
+  --     {
+  --       "<leader>tt",
+  --       function()
+  --         require("neotest").run.stop()
+  --       end,
+  --       desc = "[t]est [t]erminate",
+  --     },
+  --     {
+  --       "<leader>td",
+  --       function()
+  --         require("neotest").run.run({ suite = false, strategy = "dap" })
+  --       end,
+  --       desc = "Debug nearest test",
+  --     },
+  --   },
+  -- },
 }

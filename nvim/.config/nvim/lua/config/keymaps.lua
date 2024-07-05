@@ -33,3 +33,5 @@ vim.api.nvim_set_keymap(
   "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
   { silent = true, noremap = true, desc = "Git [W]orktree" }
 )
+
+vim.keymap.set("n", "<leader>qq", ":q<CR>", { silent = true, noremap = true, desc = "Quit" })

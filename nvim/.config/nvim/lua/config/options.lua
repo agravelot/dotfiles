@@ -24,3 +24,4 @@
 --     ["%.env%.[%w_.-]+"] = "dotenv",
 --   },
 -- })
+vim.diagnostic.config({ severity_sort = true })
