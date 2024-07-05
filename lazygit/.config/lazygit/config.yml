@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+# Colemak
+# keybinding:
+#   universal:
+#     prevItem-alt: "u"
+#     nextItem-alt: "e"
+#     prevBlock-alt: "n"
+#     nextBlock-alt: "i"
+#     nextMatch: "="
+#     prevMatch: "-"
+#     new: "k"
+#     edit: "o"
+#     openFile: "O"
+#     scrollUpMain-alt1: "U"
+#     scrollDownMain-alt1: "E"
+#     scrollUpMain-alt2: "<c-u>"
+#     scrollDownMain-alt2: "<c-e>"
+#     undo: "l"
+#     redo: "<c-r>"
+#     diffingMenu: "M"
+#     filteringMenu: "<c-f>"
+#   files:
+#     ignoreFile: "I"
+#   commits:
+#     moveDownCommit: "<c-e>"
+#     moveUpCommit: "<c-u>"
+#   branches:
+#     viewGitFlowOptions: "I"
+#     setUpstream: "U"
