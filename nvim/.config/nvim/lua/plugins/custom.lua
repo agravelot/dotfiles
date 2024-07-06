@@ -505,4 +505,23 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
   },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "Snikimonkd/telescope-git-conflicts.nvim",
+    },
+    config = function()
+      require("telescope").setup({})
+      require("telescope").load_extension("conflicts")
+    end,
+    keys = {
+      {
+        "<leader>gC",
+        "<cmd>Telescope conflicts<cr>",
+        desc = "[C]onflicts",
+      },
+    },
+  },
 }
