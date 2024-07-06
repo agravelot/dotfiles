@@ -76,6 +76,7 @@
   # Remove file(s) from Git but not from disk
   untrack = rm --cache --
 	staash = stash --all
+	undo = reset --soft HEAD^
 
 [rerere]
 	enabled = true
