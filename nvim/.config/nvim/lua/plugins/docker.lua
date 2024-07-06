@@ -46,15 +46,6 @@ return {
     config = function()
       require("telescope").load_extension("docker")
     end,
-    -- :Telescope docker containers
-    -- :Telescope docker images
-    -- :Telescope docker networks
-    -- :Telescope docker volumes
-    -- :Telescope docker contexts
-    -- :Telescope docker swarm
-    -- :Telescope docker machines
-    -- :Telescope docker compose
-    -- :Telescope docker files
     keys = {
       { "<leader>DD", "<cmd>Telescope docker<cr>", desc = "[D]ocker" },
       {
