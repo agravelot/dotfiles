@@ -41,6 +41,8 @@
 [commit]
 	verbose = true
 	gpgsign = true
+[tag]
+  gpgsign = true
 [submodule]
 	fetchJobs = 8
 [diff]
@@ -84,3 +86,6 @@
 	ui = auto
 [gpg]
 	format = ssh
+[gpg "ssh"]
+	#CHANGE PATH !!
+  ## allowedSignersFile = /Users/agravelot/.dotfiles/git/allowed_signers
