@@ -24,15 +24,8 @@ return {
   {
     "smoka7/hop.nvim",
     version = "v2",
-    opts = {},
-  },
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<leader>h"] = { name = "+hop" },
-      },
+    keys = {
+      { "<leader>h", "", desc = "+hop" },
     },
   },
 }

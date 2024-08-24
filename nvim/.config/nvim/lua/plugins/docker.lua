@@ -98,10 +98,8 @@ return {
   {
     "folke/which-key.nvim",
     optional = true,
-    opts = {
-      defaults = {
-        ["<leader>D"] = { name = "+Docker" },
-      },
+    keys = {
+      { "<leader>D", "", desc = "Docker" },
     },
   },
   {

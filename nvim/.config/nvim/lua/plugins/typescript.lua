@@ -169,7 +169,14 @@ return {
     ft = { "typescript", "typescriptreact" },
     opts = {
       use_trouble_qflist = true,
+      auto_open_qflist = true,
+      auto_close_qflist = true,
+      auto_focus_qflist = true,
       auto_start_watch_mode = true,
+      flags = {
+
+        watch = true,
+      },
     },
     config = function(_, opts)
       require("tsc").setup(opts)
@@ -370,4 +377,18 @@ return {
   --     },
   --   },
   -- },
+  {
+    "elianiva/telescope-npm.nvim",
+    keys = {
+      { "<leader>nl", "<cmd>Telescope npm list<cr>", desc = "Npm List" },
+      { "<leader>nr", "<cmd>Telescope npm scripts<cr>", desc = "Npm [R]un" },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    keys = {
+      { "<leader>n", "", desc = "+npm" },
+    },
+  },
 }

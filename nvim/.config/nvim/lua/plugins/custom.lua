@@ -469,10 +469,8 @@ return {
   {
     "folke/which-key.nvim",
     optional = true,
-    opts = {
-      defaults = {
-        ["<leader>cp"] = { name = "+preview" },
-      },
+    keys = {
+      { "<leader>cp", "", desc = "+preview" },
     },
   },
   -- support todo without ":"
