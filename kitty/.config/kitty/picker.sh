@@ -14,5 +14,14 @@ all_tabs="$(
     ' | column -ts $'\t'
 )"
 
-new_tab_id="$(fzf --reverse <<<"${all_tabs}" | awk '{ print $NF }')"
+# fzf --reverse --preview "kitty @ get-text --ansi -m title:{}" <<<"${all_tabs}"
+# fzf --reverse --preview "echo {}" --preview-window '~3' --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899' <<<"${all_tabs}"
+
+# new_tab_id="$(fzf --reverse --preview "kitty @ get-text --ansi -m $('nvim . ~/l/flasher-lerna            id:36' | awk '{ print $NF }')" --preview-window '~3' <<<"${all_tabs}" | awk '{ print $NF }')"
+# new_tab_id="$(fzf --reverse --preview "kitty @ get-text -m bs}" | awk '{ print $NF }')"
+# new_tab_id="$(fzf --reverse --preview "kitty @ get-text -m $(echo '{}' | awk '{ print $NF }')" <<<"${all_tabs}" | awk '{ print $NF }')"
+new_tab_id="$(fzf --reverse --preview "kitty @ get-text -m {}" <<<"${all_tabs}" | awk '{ print $NF }')"
+
+# echo "$new_tab_id"
+
 kitty @ focus-tab -m "${new_tab_id}"
