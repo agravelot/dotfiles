@@ -15,43 +15,65 @@
   editor = nvim -f
   core = pager
   pager = delta
+
 [interactive]
   diffFilter = delta --color-only
+
 [delta]
   navigate = true
   side-by-side = true
   line-numbers = true
+
 [merge]
   tool = diff3
 
 [color]
 	ui = auto 
+
 [branch]
 	autosetuprebase = always
 	sort = -committerdate
+
 [pull]
 	rebase = merges
+
 [push]
 	default = upstream
   followTags = true
+
 [stash]
 	showPatch = true
   all = true
+
 [rebase]
 	autostash = true
 	autosquash = true
 	updateRefs = true
+
 [commit]
 	verbose = true
 	gpgsign = true
+
 [submodule]
 	fetchJobs = 8
+
 [diff]
 	compactionHeuristic = true
 	indentHeuristic = on
   colorMoved = default
+
 [web]
 	browser = open
+
+[rerere]
+	enabled = true
+
+[column]
+	ui = auto
+
+[gpg]
+	format = ssh
+
 [alias]
   # List available aliases
   aliases = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
@@ -80,10 +102,3 @@
   untrack = rm --cache --
 	staash = stash --all
 	undo = reset --soft HEAD^
-
-[rerere]
-	enabled = true
-[column]
-	ui = auto
-[gpg]
-	format = ssh
