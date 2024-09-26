@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 git:
+  parseEmoji: true
   paging:
     colorArg: always
     pager: delta --dark --paging=never
@@ -31,3 +32,6 @@ git:
 #   branches:
 #     viewGitFlowOptions: "I"
 #     setUpstream: "U"
+os:
+  # Maybe nvim-remote:
+  editPreset: "nvim"
