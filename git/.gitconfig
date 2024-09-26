@@ -40,6 +40,7 @@
 [push]
 	default = upstream
   followTags = true
+	gpgSign = if-asked
 
 [stash]
 	showPatch = true
@@ -73,6 +74,10 @@
 
 [gpg]
 	format = ssh
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
+  format = ssh
 
 [alias]
   # List available aliases
