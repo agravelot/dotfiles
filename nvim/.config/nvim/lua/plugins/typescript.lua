@@ -110,7 +110,7 @@ return {
               --  typescript.tsserver.experimental.enableProjectDiagnostics
               tsserver = {
                 experimental = {
-                  enableProjectDiagnostics = true,
+                  -- enableProjectDiagnostics = true,
                 },
               },
             },
