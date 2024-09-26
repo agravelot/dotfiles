@@ -6,6 +6,10 @@
 [includeIf "hasconfig:remote.*.url:git@github.com:keplr-team/**"]
   path = ~/.gitconfig-work
 
+; Enforce go mod to use ssh keys
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+
 [core]
 	autocrlf = input
   editor = nvim -f
