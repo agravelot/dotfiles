@@ -1,9 +1,8 @@
 return {
   {
     "williamboman/mason.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, {
+    opts = {
+      ensure_installed = {
         "blade-formatter",
         "css-lsp",
         "diagnostic-languageserver",
@@ -15,10 +14,10 @@ return {
         -- "golangci-lint-langserver",
         -- "golangci-lint",
         "golines",
-        -- "gopls",
+        "gopls",
         "gotestsum",
-        -- "templ",
         -- "pbls",
+        "templ", -- TODO Required?
 
         "html-lsp",
         "fixjson",
@@ -26,8 +25,8 @@ return {
         "nginx-language-server",
         "sqlfluff",
         "yaml-language-server",
-      })
-    end,
+      },
+    },
   },
   {
     "nvimtools/none-ls.nvim",
@@ -58,27 +57,9 @@ return {
     },
   },
   {
-    "ThePrimeagen/refactoring.nvim",
+    "nvim-treesitter/nvim-treesitter",
     opts = {
-      -- prompt for return type
-      prompt_func_return_type = {
-        go = true,
-        cpp = true,
-        c = true,
-        java = true,
-      },
-      -- prompt for function parameters
-      prompt_func_param_type = {
-        go = true,
-        cpp = true,
-        c = true,
-        java = true,
-      },
-      -- printf_statements = {},
-      print_var_statements = {
-        go = 'fmt.Printf("%s = %#v", %s)',
-      },
-      show_success_message = true,
+      ensure_installed = { "templ" },
     },
   },
   -- {
@@ -94,30 +75,44 @@ return {
     dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
     -- ft = { "go", "gomod" },
     ---@class PluginLspOpts
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, {
+    opts = {
+      ensure_installed = {
         "dotls",
         "sqlls",
         "templ",
-        -- "gopls",
+        "gopls",
         "golangci_lint_ls",
         "htmx",
         "emmet_ls",
         "taplo", -- toml
         "yamlls",
         "vacuum", -- openapi
-      })
-
-      -- opts.servers.gopls.settings.gopls = {
-      --   lintTool = "golangci-lint",
-      --   analyses = {
-      --     unusedparams = true,
-      --     shadow = true,
-      --   },
-      --   staticcheck = true,
-      -- }
-    end,
+      },
+    },
+    -- opts = function(_, opts)
+    --   opts.ensure_installed = opts.ensure_installed or {}
+    --   vim.list_extend(opts.ensure_installed, {
+    --     "dotls",
+    --     "sqlls",
+    --     "templ",
+    --     -- "gopls",
+    --     "golangci_lint_ls",
+    --     "htmx",
+    --     "emmet_ls",
+    --     "taplo", -- toml
+    --     "yamlls",
+    --     "vacuum", -- openapi
+    --   })
+    --
+    --   -- opts.servers.gopls.settings.gopls = {
+    --   --   lintTool = "golangci-lint",
+    --   --   analyses = {
+    --   --     unusedparams = true,
+    --   --     shadow = true,
+    --   --   },
+    --   --   staticcheck = true,
+    --   -- }
+    -- end,
     -- config = function()
     --   local configs = require("lspconfig/configs")
     --   configs.gopls = {
