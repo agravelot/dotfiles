@@ -3,7 +3,7 @@
 	email = antoine.gravelot@hotmail.fr
 	signingkey = /Users/agravelot/.ssh/id_ed25519.pub
 
-[includeIf "hasconfig:remote.*.url:git@github.com:keplr-team/**"]
+[includeIf "hasconfig:remote.*.url:git@work.github.com:keplr-team/**"]
   path = ~/.gitconfig-work
 
 ; Enforce go mod to use ssh keys
