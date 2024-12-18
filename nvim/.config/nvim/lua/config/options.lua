@@ -25,3 +25,5 @@
 --   },
 -- })
 vim.diagnostic.config({ severity_sort = true })
+
+vim.g.snacks_animate = false
