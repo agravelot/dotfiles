@@ -1,12 +1,12 @@
 return {
-  {
-    "nvim-cmp",
-    dependencies = { "hrsh7th/cmp-buffer", "davidsierradz/cmp-conventionalcommits" },
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, { name = "conventionalcommits" })
-    end,
-  },
+  -- {
+  --   "nvim-cmp",
+  --   dependencies = { "hrsh7th/cmp-buffer", "davidsierradz/cmp-conventionalcommits" },
+  --   opts = function(_, opts)
+  --     opts.sources = opts.sources or {}
+  --     table.insert(opts.sources, { name = "conventionalcommits" })
+  --   end,
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
