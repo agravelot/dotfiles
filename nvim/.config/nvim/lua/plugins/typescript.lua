@@ -72,53 +72,60 @@ return {
   -- },
   {
     "nvimtools/none-ls.nvim",
-    enable = false,
+    -- enable = false,
+    -- ft = { "typescript" },
+    opts = function(_, opts)
+      local remove_sources = { "prettier" }
+      opts.sources = vim.tbl_filter(function(source)
+        return not vim.tbl_contains(remove_sources, source.name)
+      end, opts.sources)
+    end,
   },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      -- make sure mason installs the server
-      servers = {
-        -- tsserver = {
-        --   enabled = false,
-        -- },
-        vtsls = {
-          -- explicitly add default filetypes, so that we can extend
-          -- them in related extras
-          settings = {
-            vtsls = {
-              -- tsserver = {
-              experimental = {
-                enableProjectDiagnostics = true,
-                maxInlayHintLength = 30,
-              },
-              -- },
-
-              --   enableMoveToFileCodeAction = true,
-              --   autoUseWorkspaceTsdk = true,
-              --   experimental = {
-              --     completion = {
-              --       enableServerSideFuzzyMatch = true,
-              --     },
-              --   },
-            },
-            typescript = {
-              tsdk = "node_modules/typescript/lib",
-              suggest = {
-                includeAutomaticOptionalChainCompletions = true,
-              },
-              --  typescript.tsserver.experimental.enableProjectDiagnostics
-              tsserver = {
-                experimental = {
-                  -- enableProjectDiagnostics = true,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     -- make sure mason installs the server
+  --     servers = {
+  --       -- tsserver = {
+  --       --   enabled = false,
+  --       -- },
+  --       vtsls = {
+  --         -- explicitly add default filetypes, so that we can extend
+  --         -- them in related extras
+  --         settings = {
+  --           vtsls = {
+  --             -- tsserver = {
+  --             experimental = {
+  --               enableProjectDiagnostics = true,
+  --               maxInlayHintLength = 30,
+  --             },
+  --             -- },
+  --
+  --             --   enableMoveToFileCodeAction = true,
+  --             --   autoUseWorkspaceTsdk = true,
+  --             --   experimental = {
+  --             --     completion = {
+  --             --       enableServerSideFuzzyMatch = true,
+  --             --     },
+  --             --   },
+  --           },
+  --           typescript = {
+  --             -- tsdk = "node_modules/typescript/lib",
+  --             suggest = {
+  --               includeAutomaticOptionalChainCompletions = true,
+  --             },
+  --             --  typescript.tsserver.experimental.enableProjectDiagnostics
+  --             tsserver = {
+  --               experimental = {
+  --                 -- enableProjectDiagnostics = true,
+  --               },
+  --             },
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -165,16 +172,31 @@ return {
     end,
   },
   {
+    "lucaSartore/nvim-dap-exception-breakpoints",
+    dependencies = { "mfussenegger/nvim-dap" },
+
+    config = function()
+      local set_exception_breakpoints = require("nvim-dap-exception-breakpoints")
+
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>dc",
+        "",
+        { desc = "[D]ebug [C]ondition breakpoints", callback = set_exception_breakpoints }
+      )
+    end,
+  },
+  {
     "dmmulroy/tsc.nvim",
     ft = { "typescript", "typescriptreact" },
     opts = {
       use_trouble_qflist = true,
-      auto_open_qflist = true,
+      -- auto_open_qflist = true,
       auto_close_qflist = true,
       auto_focus_qflist = true,
       auto_start_watch_mode = true,
+      enable_progress_notifications = false,
       flags = {
-
         watch = true,
       },
     },

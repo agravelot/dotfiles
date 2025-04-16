@@ -9,3 +9,5 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
   pattern = { "[^l]*" },
   command = "cwindow",
 })
+
+-- vim.api.nvim_add_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})

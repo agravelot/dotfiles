@@ -78,4 +78,139 @@ return {
       show_success_message = true,
     },
   },
+  {
+    "Wansmer/treesj",
+    keys = {
+      -- {
+      --   "<leader>rs",
+      --   "<cmd>TSJSplit<cr>",
+      --   desc = "Split",
+      -- },
+      -- {
+      --   "<leader>rj",
+      --   "<cmd>TSJJoin<cr>",
+      --   desc = "Join",
+      -- },
+      {
+        "<leader>rt",
+        "<cmd>TSJToggle<cr>",
+        desc = "Toggle Split/Join Selection",
+      },
+    },
+    dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
+    opts = {
+      use_default_keymaps = false,
+    },
+    config = function(_, opts)
+      require("treesj").setup(opts)
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    keys = {
+      { "<leader>L", "", desc = "󰐪 Log" },
+    },
+  },
+  { -- quickly add log statements
+    "chrisgrieser/nvim-chainsaw",
+    cmd = "ChainSaw",
+    opts = {
+      marker = "🖨️",
+      logStatements = {
+        objectLog = {
+          lua = 'print("%s %s: " .. hs.inspect(%s))', -- Hammerspoon
+          typescript = "new Notice(`%s %s: ${%s}`, 0)", -- Obsidian
+          -- re-purposing `objectLog` for debugging via AppleScript notification
+          zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
+        },
+        clearLog = {
+          lua = "hs.console.clearConsole() -- %s", -- Hammerspoon
+        },
+        sound = {
+          lua = 'hs.sound.getByName("Sosumi"):play() -- %s', -- Hammerspoon
+          nvim_lua = 'vim.system({"osascript", "-e", "beep"}) -- %s', -- macOS only
+        },
+      },
+    },
+    keys = {
+			-- stylua: ignore start
+			{"<leader>Ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰀫 variable" },
+			{"<leader>Lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "⬟ object" },
+			{"<leader>La", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "⁉️ assert" },
+			{"<leader>Lt", function() require("chainsaw").typeLog() end, mode = {"n", "x"}, desc = "󰜀 type" },
+			{"<leader>Lm", function() require("chainsaw").messageLog() end, desc = "󰦨 message" },
+			{"<leader>Le", function() require("chainsaw").emojiLog() end, desc = "󰞅 emoji" },
+			{"<leader>Ls", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
+			{"<leader>Lp", function() require("chainsaw").timeLog() end, desc = "󱎫 performance" },
+			{"<leader>Ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
+			{"<leader>L<down>", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
+			{"<leader>Lk", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
+			{"<leader>Lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
+      -- stylua: ignore end
+    },
+  },
+  -- { -- signature hints
+  --   "ray-x/lsp_signature.nvim",
+  --   -- event = "BufReadPre",
+  --   -- opts = {
+  --   --   hint_prefix = " 󰏪 ",
+  --   --   floating_window = false,
+  --   --   always_trigger = true,
+  --   -- },
+  --   event = "InsertEnter",
+  --   opts = {
+  --     hint_prefix = " 󰏪 ",
+  --     hint_scheme = "Todo",
+  --     bind = true,
+  --     handler_opts = {
+  --       border = "rounded",
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require("lsp_signature").setup(opts)
+  --   end,
+  -- },
+  -- { -- CodeLens
+  --   "Wansmer/symbol-usage.nvim",
+  --   event = "LspAttach",
+  --   opts = {
+  --     request_pending_text = false, -- remove "loading…"
+  --     references = { enabled = true, include_declaration = false },
+  --     definition = { enabled = false },
+  --     implementation = { enabled = false },
+  --     vt_position = "signcolumn",
+  --     vt_priority = 5, -- below the gitsigns default of 6
+  --     hl = { link = "Comment" },
+  --     text_format = function(symbol)
+  --       if not symbol.references or symbol.references == 0 then
+  --         return
+  --       end
+  --       if symbol.references < 2 and vim.bo.filetype == "css" then
+  --         return
+  --       end
+  --       if symbol.references > 99 then
+  --         return ""
+  --       end
+  --
+  --       local refs = tostring(symbol.references)
+  --       local altDigits = { "󰎡", "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼" }
+  --       for i = 0, #altDigits - 1 do
+  --         refs = refs:gsub(tostring(i), altDigits[i + 1])
+  --       end
+  --       return refs
+  --     end,
+  --     -- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
+  --     kinds = {
+  --       vim.lsp.protocol.SymbolKind.File,
+  --       vim.lsp.protocol.SymbolKind.Function,
+  --       vim.lsp.protocol.SymbolKind.Method,
+  --       vim.lsp.protocol.SymbolKind.Class,
+  --       vim.lsp.protocol.SymbolKind.Interface,
+  --       vim.lsp.protocol.SymbolKind.Object,
+  --       vim.lsp.protocol.SymbolKind.Array,
+  --       vim.lsp.protocol.SymbolKind.Property,
+  --     },
+  --   },
+  -- },
 }

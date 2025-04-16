@@ -37,21 +37,21 @@ return {
   --     { "<leader>ic", "<cmd>Gen Chat<cr>", desc = "Chat" },
   --   },
   -- },
-  {
-    "folke/which-key.nvim",
-    keys = {
-      { "<leader>i", "", desc = "+ai" },
-    },
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, {
-        "llm-ls",
-      })
-    end,
-  },
+  -- {
+  --   "folke/which-key.nvim",
+  --   keys = {
+  --     { "<leader>i", "", desc = "+ai" },
+  --   },
+  -- },
+  -- {
+  --   "williamboman/mason.nvim",
+  --   opts = function(_, opts)
+  --     opts.ensure_installed = opts.ensure_installed or {}
+  --     vim.list_extend(opts.ensure_installed, {
+  --       "llm-ls",
+  --     })
+  --   end,
+  -- },
   -- {
   --   "huggingface/llm.nvim",
   --   opts = {

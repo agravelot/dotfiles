@@ -22,6 +22,7 @@
     "lazyvim.plugins.extras.lang.php",
     "lazyvim.plugins.extras.lang.scala",
     "lazyvim.plugins.extras.lang.sql",
+    "lazyvim.plugins.extras.lang.terraform",
     "lazyvim.plugins.extras.lang.toml",
     "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.lang.yaml",
@@ -36,8 +37,9 @@
     "lazyvim.plugins.extras.util.project",
     "lazyvim.plugins.extras.util.rest"
   ],
+  "install_version": 7,
   "news": {
     "NEWS.md": "10960"
   },
-  "version": 7
+  "version": 8
 }
