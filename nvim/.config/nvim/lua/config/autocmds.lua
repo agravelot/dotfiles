@@ -11,3 +11,24 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 })
 
 -- vim.api.nvim_add_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
+--
+
+local function file_exists_in_root(filename)
+  local cwd = vim.fn.getcwd()
+  local path = cwd .. "/" .. filename
+  return vim.fn.filereadable(path) == 1
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "yaml",
+  callback = function()
+    if file_exists_in_root("crd.yaml") then
+      vim.keymap.set(
+        "n",
+        "<leader>cy",
+        ":lua require('crd').init()<CR>",
+        { silent = true, noremap = true, desc = "Close buffer", buffer = true }
+      )
+    end
+  end,
+})
