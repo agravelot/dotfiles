@@ -3,7 +3,7 @@ local curl = require("plenary.curl")
 local M = {
   schemas_catalogs = {
     { name = "datreeio/CRDs-catalog", branch = "main", tree = {} },
-    { name = "instrumenta/kubernetes-json-schema", branch = "master", tree = {} },
+    { name = "yannh/kubernetes-json-schema", branch = "master", tree = {} },
   },
   github_base_api_url = "https://api.github.com/repos",
   github_headers = {
