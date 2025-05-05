@@ -9,7 +9,10 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_CACHE_HOME "$HOME/.cache"
-eval "$(/opt/homebrew/bin/brew shellenv)"
+
+if test -d /opt/homebrew/bin
+    set -gx PATH /opt/homebrew/bin $PATH
+end
 
 # test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 
