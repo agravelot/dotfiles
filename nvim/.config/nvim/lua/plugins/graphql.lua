@@ -9,8 +9,8 @@ return {
     end,
   },
   {
-    "williamboman/mason-lspconfig",
-    dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = { "neovim/nvim-lspconfig", "mason-org/mason.nvim" },
     ---@class PluginLspOpts
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}

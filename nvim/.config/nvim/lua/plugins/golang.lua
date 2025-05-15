@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "blade-formatter",
@@ -33,7 +33,7 @@ return {
     optional = true,
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = { ensure_installed = { "gomodifytags", "impl", "golangci-lint", "revive" } },
       },
     },
@@ -71,8 +71,8 @@ return {
   --   },
   -- },
   {
-    "williamboman/mason-lspconfig",
-    dependencies = { "neovim/nvim-lspconfig", "williamboman/mason.nvim" },
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = { "neovim/nvim-lspconfig", "mason-org/mason.nvim" },
     -- ft = { "go", "gomod" },
     ---@class PluginLspOpts
     opts = {

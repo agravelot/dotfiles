@@ -20,7 +20,7 @@ return {
     end,
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
@@ -37,5 +37,42 @@ return {
     config = function()
       require("telescope").load_extension("git_worktree")
     end,
+  },
+  {
+    "folke/snacks.nvim",
+    ---@type snacks.Config
+    opts = {
+      lazygit = {
+        -- your lazygit configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        styles = {
+          float = {
+            width = 1,
+            height = 1,
+          },
+        },
+      },
+    },
+  },
+  {
+    "johnseth97/gh-dash.nvim",
+    lazy = true,
+    keys = {
+      {
+        "<leader>gd",
+        function()
+          require("gh_dash").toggle()
+        end,
+        desc = "Toggle gh-dash popup",
+      },
+    },
+    opts = {
+      keymaps = {}, -- disable internal mapping
+      border = "rounded", -- or 'double'
+      width = 1,
+      height = 1,
+      autoinstall = true,
+    },
   },
 }
