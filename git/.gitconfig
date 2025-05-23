@@ -107,3 +107,4 @@
   untrack = rm --cache --
 	staash = stash --all
 	undo = reset --soft HEAD^
+  f = absorb --force --and-rebase
