@@ -195,7 +195,7 @@ return {
       auto_close_qflist = true,
       auto_focus_qflist = true,
       auto_start_watch_mode = true,
-      enable_progress_notifications = false,
+      enable_progress_notifications = true,
       flags = {
         watch = true,
       },
