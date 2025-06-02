@@ -8,7 +8,7 @@ return {
       -- provide the inlay hints.
       -- TODO Re-enable?
       inlay_hints = {
-        enabled = false,
+        enabled = true,
         style = "inlay",
       },
       -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
