@@ -64,6 +64,9 @@
 	indentHeuristic = on
   colorMoved = default
 
+[fetch]
+	prune = true
+
 [web]
 	browser = open
 
