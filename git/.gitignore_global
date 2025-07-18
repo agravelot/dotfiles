@@ -1,4 +1,6 @@
 .idea
+.sqruff
+.lazy.lua
 .vscode
 node_modules
 .env

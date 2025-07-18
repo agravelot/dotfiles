@@ -3,18 +3,19 @@
 	email = antoine.gravelot@hotmail.fr
 	signingkey = ~/.ssh/id_ed25519.pub
 
+; Enforce go mod to use ssh keys
+[url "ssh://git@work.github.com/"]
+	insteadOf = https://github.com/
+
 [includeIf "hasconfig:remote.*.url:git@work.github.com:keplr-team/**"]
   path = ~/.gitconfig-work
-
-; Enforce go mod to use ssh keys
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
 
 [core]
 	autocrlf = input
   editor = nvim -f
   core = pager
   pager = delta
+	excludesFile = ~/.gitignore_global
 
 [interactive]
   diffFilter = delta --color-only
