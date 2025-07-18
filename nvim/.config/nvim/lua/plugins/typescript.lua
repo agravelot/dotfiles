@@ -159,16 +159,45 @@ return {
       })
     end,
   },
+  -- {
+  --   "vuki656/package-info.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim" },
+  --   ft = "json",
+  --   opts = {
+  --     hide_up_to_date = true,
+  --     package_manager = "npm",
+  --   },
+  --   config = function()
+  --     require("package-info").setup()
+  --   end,
+  -- },
   {
-    "vuki656/package-info.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    ft = "json",
-    opts = {
-      hide_up_to_date = true,
-      package_manager = "npm",
-    },
-    config = function()
-      require("package-info").setup()
+    "saghen/blink.cmp",
+    dependencies = { "alexandre-abrioux/blink-cmp-npm.nvim" },
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      opts.sources.default = opts.sources.default or {}
+      opts.sources.providers = opts.sources.providers or {}
+  
+      -- Ensure that the 'npm' source is added to the default sources
+      opts.sources.default = vim.list_extend(opts.sources.default, { "npm" })
+      opts.sources.providers = vim.tbl_deep_extend("force", {
+        npm = {
+          name = "npm",
+          module = "blink-cmp-npm",
+          async = true,
+          -- optional - make blink-cmp-npm completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+          -- optional - blink-cmp-npm config
+          ---@module "blink-cmp-npm"
+          ---@type blink-cmp-npm.Options
+          opts = {
+            ignore = {},
+            only_semantic_versions = true,
+            only_latest_version = false,
+          },
+        },
+      }, opts.sources.providers)
     end,
   },
   {
