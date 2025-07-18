@@ -47,49 +47,49 @@ return {
       require("telescope").load_extension("docker")
     end,
     keys = {
-      { "<leader>DD", "<cmd>Telescope docker<cr>", desc = "[D]ocker" },
+      { "<leader>OD", "<cmd>Telescope docker<cr>", desc = "d[O]cker" },
       {
-        "<leader>Dc",
+        "<leader>Oc",
         "<cmd>Telescope docker containers<cr>",
         desc = "Docker [c]ontainers",
       },
       {
-        "<leader>DC",
+        "<leader>OC",
         "<cmd>Telescope docker compose<cr>",
         desc = "Docker [C]ompose",
       },
       {
-        "<leader>Di",
+        "<leader>Oi",
         "<cmd>Telescope docker images<cr>",
         desc = "Docker [i]mages",
       },
       {
-        "<leader>Dn",
+        "<leader>On",
         "<cmd>Telescope docker networks<cr>",
         desc = "Docker [n]etworks",
       },
       {
-        "<leader>Dv",
+        "<leader>Ov",
         "<cmd>Telescope docker volumes<cr>",
         desc = "Docker [v]olumes",
       },
       {
-        "<leader>Df",
+        "<leader>Of",
         "<cmd>Telescope docker files<cr>",
         desc = "Docker [f]iles",
       },
       {
-        "<leader>Ds",
+        "<leader>Os",
         "<cmd>Telescope docker swarm<cr>",
         desc = "Docker [s]warm",
       },
       {
-        "<leader>Dm",
+        "<leader>Om",
         "<cmd>Telescope docker machines<cr>",
         desc = "Docker [m]achines",
       },
       {
-        "<leader>Dx",
+        "<leader>Ox",
         "<cmd>Telescope docker contexts<cr>",
         desc = "Docker conte[x]ts",
       },
@@ -99,7 +99,7 @@ return {
     "folke/which-key.nvim",
     optional = true,
     keys = {
-      { "<leader>D", "", desc = "Docker" },
+      { "<leader>O", "", desc = "Docker" },
     },
   },
   {
