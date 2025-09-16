@@ -14,21 +14,21 @@ return {
       },
     },
   },
-  {
-    "stevearc/oil.nvim",
-    opts = {
-      -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
-      -- Set to false if you still want to use netrw.
-      default_file_explorer = true,
-    },
-    -- keys = {
-    -- { "n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" } },
-    -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-    -- { "n", "<leader>O", "<cmd>Oil .<cr>" },
-    -- },
-    -- Optional dependencies
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
+  -- {
+  --   "stevearc/oil.nvim",
+  --   opts = {
+  --     -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
+  --     -- Set to false if you still want to use netrw.
+  --     default_file_explorer = true,
+  --   },
+  --   -- keys = {
+  --   -- { "n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" } },
+  --   -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+  --   -- { "n", "<leader>O", "<cmd>Oil .<cr>" },
+  --   -- },
+  --   -- Optional dependencies
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- },
   {
     "chrishrb/gx.nvim",
     keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
@@ -57,7 +57,7 @@ return {
             handle = function(mode, line, _)
               local ticket = require("gx.helper").find(line, mode, "(%u+-%d+)")
               if ticket and #ticket < 20 then
-                return "http://jira.company.com/browse/" .. ticket
+                return "https://keplr.atlassian.net/browse/" .. ticket
               end
             end,
           },
