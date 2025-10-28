@@ -17,24 +17,23 @@ return {
   --     })
   --   end,
   -- },
-  -- {
-  --   "mason-org/mason-lspconfig.nvim",
-  --   opts = function(_, opts)
-  --     opts.ensure_installed = opts.ensure_installed or {}
-  --     vim.list_extend(opts.ensure_installed, {
-  --       "dockerls",
-  --       "docker_compose_language_service",
-  --     })
-  --   end,
-  -- },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        -- "dockerls",
+        "docker_language_server",
+      })
+    end,
+  },
   -- {
   --   "neovim/nvim-lspconfig",
   --   ---@class PluginLspOpts
   --   opts = {
   --     ---@type lspconfig.options
   --     ensure_installed = {
-  --       -- "dockerls",
-  --       "docker_compose_language_service",
+  --       "docker_language_server",
   --     },
   --   },
   -- },

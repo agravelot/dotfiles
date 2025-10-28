@@ -28,65 +28,57 @@ return {
       },
     },
   },
-  {
-    "nvimtools/none-ls.nvim",
-    optional = true,
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = { ensure_installed = { "gomodifytags", "impl", "golangci-lint", "revive" } },
-      },
-    },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-
-      opts.should_attach = function(bufnr)
-        local bufname = vim.api.nvim_buf_get_name(bufnr)
-        local full_path = vim.fn.resolve(bufname)
-        local excluded_keywords = { "/generated/", "/codegen/", "/gen/" }
-
-        for _, keyword in ipairs(excluded_keywords) do
-          if full_path:find(keyword, 1, true) then
-            vim.notify("Skipping null-ls for " .. keyword .. " folder", vim.log.levels.INFO, { title = "null-ls" })
-
-            return false
-          end
-        end
-
-        return true
-      end
-
-      opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.diagnostics.golangci_lint,
-        nls.builtins.diagnostics.revive,
-      })
-    end,
-  },
+  -- {
+  --   "nvimtools/none-ls.nvim",
+  --   optional = true,
+  --   dependencies = {
+  --     {
+  --       "mason-org/mason.nvim",
+  --       opts = { ensure_installed = { "gomodifytags", "impl", "golangci-lint", "revive" } },
+  --     },
+  --   },
+  --   opts = function(_, opts)
+  --     local nls = require("null-ls")
+  --
+  --     opts.should_attach = function(bufnr)
+  --       local bufname = vim.api.nvim_buf_get_name(bufnr)
+  --       local full_path = vim.fn.resolve(bufname)
+  --       local excluded_keywords = { "/generated/", "/codegen/", "/gen/" }
+  --
+  --       for _, keyword in ipairs(excluded_keywords) do
+  --         if full_path:find(keyword, 1, true) then
+  --           vim.notify("Skipping null-ls for " .. keyword .. " folder", vim.log.levels.INFO, { title = "null-ls" })
+  --
+  --           return false
+  --         end
+  --       end
+  --
+  --       return true
+  --     end
+  --
+  --     opts.sources = vim.list_extend(opts.sources or {}, {
+  --       nls.builtins.diagnostics.golangci_lint,
+  --       nls.builtins.diagnostics.revive,
+  --     })
+  --   end,
+  -- },
   -- Disable duplicate with null-ls
-  {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        -- go = { "goimports", "gofumpt" },
-        go = {},
-      },
-    },
-  },
+  -- {
+  --   "stevearc/conform.nvim",
+  --   optional = true,
+  --   opts = {
+  --     formatters_by_ft = {
+  --       -- go = { "goimports", "gofumpt" },
+  --       go = {},
+  --     },
+  --   },
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = { "templ" },
     },
   },
-  -- {
-  --   "mfussenegger/nvim-lint",
-  --   opts = {
-  --     linter_by_ft = {
-  --       go = { "golangci_lint", "revive" },
-  --     },
-  --   },
-  -- },
   {
     "mason-org/mason-lspconfig.nvim",
     dependencies = { "neovim/nvim-lspconfig", "mason-org/mason.nvim" },

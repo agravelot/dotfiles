@@ -9,6 +9,15 @@ return {
     end,
   },
   {
+    "mason-org/mason.nvim",
+    opts = {
+      ensure_installed = {
+        -- ...elided others
+        "graphql-language-service-cli", -- required for graphql-lsp
+      },
+    },
+  },
+  {
     "mason-org/mason-lspconfig.nvim",
     dependencies = { "neovim/nvim-lspconfig", "mason-org/mason.nvim" },
     ---@class PluginLspOpts
