@@ -3,8 +3,8 @@
 SETUVAR VIRTUAL_ENV_DISABLE_PROMPT:true
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/home/agravelot/\x2elocal/share/z/data
-SETUVAR Z_DATA_DIR:/home/agravelot/\x2elocal/share/z
+SETUVAR Z_DATA:/Users/agravelot/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:/Users/agravelot/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/Users/agravelot\x24
 SETUVAR __fish_initialized:3800
 SETUVAR _fisher_brewingweasel_2F_fishbang_files:\x7e/\x2econfig/fish/conf\x2ed/fishbang\x2efish
@@ -73,7 +73,7 @@ SETUVAR _tide_prompt_91412:\x1d
 SETUVAR _tide_prompt_92182:\x1d
 SETUVAR _tide_prompt_98359:\x1d
 SETUVAR _tide_prompt_9990:\x1d
-SETUVAR _tide_right_items:status\x1ecmd_duration\x1econtext\x1ejobs\x1enode\x1evirtual_env\x1erustc\x1ego
+SETUVAR _tide_right_items:status\x1ecmd_duration\x1econtext\x1ejobs\x1enode\x1evirtual_env\x1erustc\x1ejava\x1ephp\x1ego\x1egcloud\x1ekubectl\x1eterraform\x1eaws
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue
