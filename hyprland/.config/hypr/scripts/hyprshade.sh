@@ -7,10 +7,20 @@
 #        |___/|_|
 #
 
+# Notifications
+source "$HOME/.config/ml4w/scripts/notification-handler.sh"
+APP_NAME="Hyprshade"
+NOTIFICATION_ICON="video-display-symbolic"
+
+# Remove legacy shaders folder
+if [ -d $HOME/.config/hypr/shaders ]; then
+    rm -rf $HOME/.config/hypr/shaders
+fi
+
 if [[ "$1" == "rofi" ]]; then
 
     # Open rofi to select the Hyprshade filter for toggle
-    options="$(hyprshade ls)\noff"
+    options="$(hyprshade ls | sed 's/^[ *]*//')\noff"
 
     # Open rofi
     choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/.config/rofi/config-hyprshade.rasi -i -no-show-icons -l 4 -width 30 -p "Hyprshade")
@@ -18,10 +28,16 @@ if [[ "$1" == "rofi" ]]; then
         echo "hyprshade_filter=\"$choice\"" >~/.config/ml4w/settings/hyprshade.sh
         if [ "$choice" == "off" ]; then
             hyprshade off
-            notify-send "Hyprshade deactivated"
+            notify_user --a "${APP_NAME}" \
+                --i "${NOTIFICATION_ICON}" \
+                --s "Hyprshade turned off" \
+                --m ""
             echo ":: hyprshade turned off"
         else
-            notify-send "Changing Hyprshade to $choice" "Toggle shader with SUPER+SHIFT+S"
+            notify_user --a "${APP_NAME}" \
+                --i "${NOTIFICATION_ICON}" \
+                --s "Hyprshade filter" \
+                --m "Changing Hyprshade filter to \"$choice.\" \nToggle shader with SUPER+SHIFT+H"
         fi
     fi
 
@@ -40,10 +56,16 @@ else
         if [ -z $(hyprshade current) ]; then
             echo ":: hyprshade is not running"
             hyprshade on $hyprshade_filter
-            notify-send "Hyprshade activated" "with $(hyprshade current)"
+            notify_user --a "${APP_NAME}" \
+                --i "${NOTIFICATION_ICON}" \
+                --s "Hyprshade activated" \
+                --m "Current filter: $(hyprshade current)."
             echo ":: hyprshade started with $(hyprshade current)"
         else
-            notify-send "Hyprshade deactivated"
+            notify_user --a "${APP_NAME}" \
+                --i "${NOTIFICATION_ICON}" \
+                --s "Hyprshade deactivated" \
+                --m ""
             echo ":: Current hyprshade $(hyprshade current)"
             echo ":: Switching hyprshade off"
             hyprshade off

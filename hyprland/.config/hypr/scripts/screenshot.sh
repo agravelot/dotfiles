@@ -1,11 +1,11 @@
-#!/bin/bash
-#  ____                               _           _
-# / ___|  ___ _ __ ___  ___ _ __  ___| |__   ___ | |_
-# \___ \ / __| '__/ _ \/ _ \ '_ \/ __| '_ \ / _ \| __|
-#  ___) | (__| | |  __/  __/ | | \__ \ | | | (_) | |_
-# |____/ \___|_|  \___|\___|_| |_|___/_| |_|\___/ \__|
-#
+#!/usr/bin/env bash
+#                                 __        __ 
+#   ___ ___________ ___ ___  ___ / /  ___  / /_
+#  (_-</ __/ __/ -_) -_) _ \(_-</ _ \/ _ \/ __/
+# /___/\__/_/  \__/\__/_//_/___/_//_/\___/\__/ 
+#                                              
 # Based on https://github.com/hyprwm/contrib/blob/main/grimblast/screenshot.sh
+
 # -----------------------------------------------------
 
 # Screenshots will be stored in $HOME by default.
@@ -17,20 +17,73 @@
 prompt='Screenshot'
 mesg="DIR: ~/Screenshots"
 
-# Screenshot Filename
-source ~/.config/ml4w/settings/screenshot-filename.sh
+SAVE_DIR=$(cat ~/.config/ml4w/settings/screenshot-folder)
+SAVE_FILENAME=$(cat ~/.config/ml4w/settings/screenshot-filename)
+eval screenshot_folder="$SAVE_DIR"
+eval NAME="$SAVE_FILENAME"
 
-# Screenshot Folder
-source ~/.config/ml4w/settings/screenshot-folder.sh
+# Notifications
+source "$HOME/.config/ml4w/scripts/notification-handler.sh"
+APP_NAME="Screen Capture"
+NOTIFICATION_ICON="camera-photo-symbolic"
 
 # Screenshot Editor
-export GRIMBLAST_EDITOR="$(cat ~/.config/ml4w/settings/screenshot-editor.sh)"
+export GRIMBLAST_EDITOR="$(cat ~/.config/ml4w/settings/screenshot-editor)"
 
 # Example for keybindings
 # bind = SUPER, p, exec, grimblast save active
 # bind = SUPER SHIFT, p, exec, grimblast save area
 # bind = SUPER ALT, p, exec, grimblast save output
 # bind = SUPER CTRL, p, exec, grimblast save screen
+
+# Quick instant mode: full screen
+take_instant_full() {
+    grim "$NAME" && notify_user \
+        --a "${APP_NAME}" \
+        --i "${NOTIFICATION_ICON}" \
+        --s "Screenshot saved" \
+        --m "$screenshot_folder/$NAME" \
+        --t 1000
+
+    [[ -f "$HOME/$NAME" && -d "$screenshot_folder" && -w "$screenshot_folder" ]] && mv "$HOME/$NAME" "$screenshot_folder/"
+}
+
+# Quick instant mode: area selection
+take_instant_area() {
+    local pid_picker region
+
+    # freeze screen for region selection
+    hyprpicker -r -z &
+    pid_picker=$!
+    trap 'kill "$pid_picker" 2>/dev/null' EXIT
+    sleep 0.1
+
+    # user selects region; kill picker on cancel
+    region=$(slurp -b "#00000080" -c "#888888ff" -w 1) || exit 0
+    [[ -z "$region" ]] && exit 0
+
+    # unfreeze screen
+    kill "$pid_picker" 2>/dev/null
+    trap - EXIT
+
+    # capture and notify
+    grim -g "$region" "$NAME" && notify_user \
+        --a "${APP_NAME}" \
+        --i "${NOTIFICATION_ICON}" \
+        --s "Screenshot saved" \
+        --m "$screenshot_folder/$NAME" \
+        --t 1000
+    [[ -f "$HOME/$NAME" && -d "$screenshot_folder" && -w "$screenshot_folder" ]] && mv "$HOME/$NAME" "$screenshot_folder/"
+}
+
+# Handle instant flags
+if [[ "$1" == "--instant" ]]; then
+    take_instant_full
+    exit 0
+elif [[ "$1" == "--instant-area" ]]; then
+    take_instant_area
+    exit 0
+fi
 
 # Options
 option_1="Immediate"
@@ -166,13 +219,23 @@ copy_save_editor_run() {
 
 timer() {
     if [[ $countdown -gt 10 ]]; then
-        notify-send -t 1000 "Taking screenshot in ${countdown} seconds"
+        notify_user \
+            --a "${APP_NAME}" \
+            --i "${NOTIFICATION_ICON}" \
+            --s "Taking screenshot in ${countdown} seconds" \
+            --m "" \
+            --t 1000
         countdown_less_10=$((countdown - 10))
         sleep $countdown_less_10
         countdown=10
     fi
     while [[ $countdown -ne 0 ]]; do
-        notify-send -t 1000 "Taking screenshot in ${countdown} seconds"
+        notify_user \
+            --a "${APP_NAME}" \
+            --i "${NOTIFICATION_ICON}" \
+            --s "Taking screenshot in ${countdown} seconds" \
+            --m "" \
+            --t 1000
         countdown=$((countdown - 1))
         sleep 1
     done
@@ -192,6 +255,7 @@ takescreenshot() {
 takescreenshot_timer() {
     sleep 1
     timer
+    sleep 1
     grimblast --notify "$option_chosen" "$option_type_screenshot" $NAME
     if [ -f $HOME/$NAME ]; then
         if [ -d $screenshot_folder ]; then

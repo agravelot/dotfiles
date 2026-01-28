@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # __        ______    _____  __  __           _
 # \ \      / /  _ \  | ____|/ _|/ _| ___  ___| |_ ___
 #  \ \ /\ / /| |_) | |  _| | |_| |_ / _ \/ __| __/ __|
@@ -6,8 +6,15 @@
 #    \_/\_/  |_|     |_____|_| |_|  \___|\___|\__|___/
 #
 
+# Notifications
+source "$HOME/.config/ml4w/scripts/notification-handler.sh"
+APP_NAME="Waypaper"
+NOTIFICATION_ICON="preferences-desktop-wallpaper-symbolic"
+
+ml4w_cache_folder="$HOME/.cache/ml4w/hyprland-dotfiles"
+
 # Get current wallpaper
-cache_file="$HOME/.config/ml4w/cache/current_wallpaper"
+cache_file="$ml4w_cache_folder/current_wallpaper"
 
 if [ $1 == "reload" ]; then
     # Releod wallpaper with current effect
@@ -20,7 +27,13 @@ else
     choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/.config/rofi/config-themes.rasi -i -no-show-icons -l 5 -width 30 -p "Hyprshade")
     if [ ! -z $choice ]; then
         echo "$choice" >~/.config/ml4w/settings/wallpaper-effect.sh
-        notify-send "Changing Wallpaper Effect to " "$choice"
+
+        notify_user \
+            --a "${APP_NAME}" \
+            --i "${NOTIFICATION_ICON}" \
+            --s "Wallpaper" \
+            --m "Changing Wallpaper Effect to " "$choice."
+
         waypaper --wallpaper $(cat $cache_file)
     fi
 fi

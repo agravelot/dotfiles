@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #   ____ _ _       _     _     _
 #  / ___| (_)_ __ | |__ (_)___| |_
 # | |   | | | '_ \| '_ \| / __| __|
@@ -7,18 +7,22 @@
 #           |_|
 #
 
-case $1 in
-    d)
-        cliphist list | rofi -dmenu -replace -config ~/.config/rofi/config-cliphist.rasi | cliphist delete
+# -----------------------------------------------------
+# Load Launcher
+# -----------------------------------------------------
+launcher=$(cat $HOME/.config/ml4w/settings/launcher)
+if [ "$launcher" == "walker" ]; then
+    $HOME/.config/walker/launch.sh -m clipboard -N -H
+else
+    case $1 in
+        d)
+            cliphist list | rofi -dmenu -replace -config ~/.config/rofi/config-cliphist.rasi | cliphist delete
         ;;
-
-    w)
-        if [ $(echo -e "Clear\nCancel" | rofi -dmenu -config ~/.config/rofi/config-short.rasi) == "Clear" ]; then
+        w)    
             cliphist wipe
-        fi
         ;;
-
-    *)
-        cliphist list | rofi -dmenu -replace -config ~/.config/rofi/config-cliphist.rasi | cliphist decode | wl-copy
+        *)
+            cliphist list | rofi -dmenu -replace -config ~/.config/rofi/config-cliphist.rasi | cliphist decode | wl-copy
         ;;
-esac
+    esac
+fi

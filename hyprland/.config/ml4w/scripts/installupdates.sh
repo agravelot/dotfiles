@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #    ____         __       ____               __     __
 #   /  _/__  ___ / /____ _/ / / __ _____  ___/ /__ _/ /____ ___
 #  _/ // _ \(_-</ __/ _ `/ / / / // / _ \/ _  / _ `/ __/ -_|_-<
@@ -6,26 +6,16 @@
 #                                 /_/
 #
 
-sleep 1
-clear
-install_platform="$(cat ~/.config/ml4w/settings/platform.sh)"
-figlet -f smslant "Updates"
-echo
-
-# ------------------------------------------------------
-# Confirm Start
-# ------------------------------------------------------
-
-if gum confirm "DO YOU WANT TO START THE UPDATE NOW?"; then
-    echo
-    echo ":: Update started."
-elif [ $? -eq 130 ]; then
-    exit 130
-else
-    echo
-    echo ":: Update canceled."
-    exit
-fi
+# Check if command exists
+_checkCommandExists() {
+    cmd="$1"
+    if ! command -v "$cmd" >/dev/null; then
+        echo 1
+        return
+    fi
+    echo 0
+    return
+}
 
 _isInstalled() {
     package="$1"
@@ -47,54 +37,68 @@ _isInstalled() {
     return #false
 }
 
-# Check if platform is supported
-case $install_platform in
-    arch)
-        aur_helper="$(cat ~/.config/ml4w/settings/aur.sh)"
+# ------------------------------------------------------
+# Confirm Start
+# ------------------------------------------------------
 
-        if [[ $(_isInstalled "timeshift") == "0" ]]; then
-            echo
-            if gum confirm "DO YOU WANT TO CREATE A SNAPSHOT?"; then
-                echo
-                c=$(gum input --placeholder "Enter a comment for the snapshot...")
-                sudo timeshift --create --comments "$c"
-                sudo timeshift --list
-                sudo grub-mkconfig -o /boot/grub/grub.cfg
-                echo ":: DONE. Snapshot $c created!"
-                echo
-            elif [ $? -eq 130 ]; then
-                echo ":: Snapshot skipped."
-                exit 130
-            else
-                echo ":: Snapshot skipped."
-            fi
-            echo
-        fi
-
-        $aur_helper
-
-        if [[ $(_isInstalled "flatpak") == "0" ]]; then
-            flatpak upgrade
-        fi
-        ;;
-    fedora)
-        sudo dnf upgrade
-        if [[ $(_isInstalled "flatpak") == "0" ]]; then
-            flatpak upgrade
-        fi
-        ;;
-    *)
-        echo ":: ERROR - Platform not supported"
-        echo "Press [ENTER] to close."
-        read
-        ;;
-esac
-
-notify-send "Update complete"
+sleep 1
+clear
+figlet -f smslant "Updates"
 echo
-echo ":: Update complete"
-echo
+primarycolor=$(cat ~/.config/ml4w/colors/primary)
+onsurfacecolor=$(cat ~/.config/ml4w/colors/onsurface)
+if gum confirm --selected.background=$primarycolor --prompt.foreground=$onsurfacecolor "DO YOU WANT TO START THE UPDATE NOW?"; then
+    echo
+    echo ":: Update started..."
+elif [ $? -eq 130 ]; then
+    exit 130
+else
+    echo
+    echo ":: Update canceled."
+    exit
+fi
+
+# ----------------------------------------------------- 
+# Install update
+# ----------------------------------------------------- 
+
+# Arch
+if [[ $(_checkCommandExists "pacman") == 0 ]]; then
+
+    yay_installed="false"
+    paru_installed="false"
+    if [[ $(_checkCommandExists "yay") == 0 ]]; then
+        yay_installed="true"
+    fi
+    if [[ $(_checkCommandExists "paru") == 0 ]]; then
+        paru_installed="true"
+    fi
+    if [[ $yay_installed == "true" ]] && [[ $paru_installed == "false" ]]; then
+        yay
+    elif [[ $yay_installed == "false" ]] && [[ $paru_installed == "true" ]]; then
+        paru -Syu --noconfirm
+    else
+        yay
+    fi
+
+# Fedora
+elif [[ $(_checkCommandExists "dnf") == 0 ]]; then
+    sudo dnf upgrade
+else
+    echo ":: ERROR - Platform not supported"
+    echo "Press [ENTER] to close."
+    read
+fi
 echo
 
-echo "Press [ENTER] to close."
+# Flatpak
+echo ":: Searching for Flatpak updates..."
+flatpak update
+echo
+
+# Reload Waybar
+pkill -RTMIN+1 waybar
+
+# Finishing
+echo ":: Update complete! Press [ENTER] to close."
 read

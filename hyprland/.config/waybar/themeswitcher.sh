@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #  _____ _                                       _ _       _
 # |_   _| |__   ___ _ __ ___   ___  _____      _(_) |_ ___| |__   ___ _ __
 #   | | | '_ \ / _ \ '_ ` _ \ / _ \/ __\ \ /\ / / | __/ __| '_ \ / _ \ '__|
@@ -7,6 +7,11 @@
 #
 # by Stephan Raabe (2024)
 # -----------------------------------------------------
+
+# -----------------------------------------------------
+# Load Launcher
+# -----------------------------------------------------
+launcher=$(cat $HOME/.config/ml4w/settings/launcher)
 
 # -----------------------------------------------------
 # Default theme folder
@@ -46,10 +51,30 @@ for value in $options; do
 done
 
 # -----------------------------------------------------
-# Show rofi dialog
+# Use Walker to select the theme
+# -----------------------------------------------------
+_get_choice_walker() {
+    echo $(echo -e "$listNames" | $HOME/.config/walker/launch.sh -d -i -N -H --height 400 -p "Search Theme")
+}
+
+# -----------------------------------------------------
+# Use Rofi to select the theme
+# -----------------------------------------------------
+_get_choice_rofi() {
+    echo $(echo -e "$listNames" | rofi -dmenu -replace -i -config ~/.config/rofi/config-themes.rasi -no-show-icons -width 30 -p "Themes" -format i)
+}
+
+# -----------------------------------------------------
+# Show dialog
 # -----------------------------------------------------
 listNames=${listNames::-2}
-choice=$(echo -e "$listNames" | rofi -dmenu -replace -i -config ~/.config/rofi/config-themes.rasi -no-show-icons -width 30 -p "Themes" -format i)
+
+if [ "$launcher" == "walker" ]; then
+    choice=$(_get_choice_walker)
+else
+    choice=$(_get_choice_rofi)
+fi
+
 IFS="~"
 input=$listNames2
 read -ra array <<<"$input"
