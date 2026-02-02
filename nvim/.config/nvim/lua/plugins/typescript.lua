@@ -9,9 +9,6 @@
 -- }
 
 return {
-  { import = "lazyvim.plugins.extras.linting.eslint" },
-  { import = "lazyvim.plugins.extras.formatting.prettier" },
-
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   -- {
   --   "neovim/nvim-lspconfig",
