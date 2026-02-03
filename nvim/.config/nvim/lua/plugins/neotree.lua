@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
     opts = function(_, opts)
       -- Show hidden files
       -- opts.filesystem.filtered_items.hide_dotfiles = false
