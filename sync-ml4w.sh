@@ -23,6 +23,9 @@ mkdir -p "$DEST"
 echo "Copying dotfiles..."
 cp -a "$TMP_DIR"/dotfiles/. "$DEST"/
 
+echo "Restoring browser.sh to keep zen-browser..."
+git checkout HEAD -- hyprland/.config/ml4w/settings/browser.sh
+
 echo "Cleaning up..."
 rm -rf "$TMP_DIR"
 
