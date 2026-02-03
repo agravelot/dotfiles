@@ -3,10 +3,10 @@
 SETUVAR VIRTUAL_ENV_DISABLE_PROMPT:true
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/Users/agravelot/\x2elocal/share/z/data
-SETUVAR Z_DATA_DIR:/Users/agravelot/\x2elocal/share/z
-SETUVAR Z_EXCLUDE:\x5e/Users/agravelot\x24
-SETUVAR __fish_initialized:3800
+SETUVAR Z_DATA:~/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:~/\x2elocal/share/z
+SETUVAR Z_EXCLUDE:\x5e~\x24
+SETUVAR __fish_initialized:4300
 SETUVAR _fisher_brewingweasel_2F_fishbang_files:\x7e/\x2econfig/fish/conf\x2ed/fishbang\x2efish
 SETUVAR _fisher_edc_2F_bass_files:\x7e/\x2econfig/fish/functions/__bass\x2epy\x1e\x7e/\x2econfig/fish/functions/bass\x2efish
 SETUVAR _fisher_franciscolourenco_2F_done_files:\x7e/\x2econfig/fish/conf\x2ed/done\x2efish
@@ -96,7 +96,6 @@ SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrbl
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
 SETUVAR fish_color_valid_path:\x2d\x2dunderline
-SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:yellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
