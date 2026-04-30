@@ -112,6 +112,31 @@ to-worktree.sh <folder-name>   # Converts ~/lab/<folder> to worktree
 
 Creates bare repo in `~/.git-bare-repos/` and preserves all stashed changes.
 
+## Importing Existing Configs
+
+When adding a new module that already exists on the system (e.g., `~/.config/autostart`), there are two scenarios:
+
+### New files (different names)
+If the system has files not yet tracked in the repo (or with different names), manually copy them into the module tree, then run stow:
+
+```bash
+mkdir -p <module>/.config/<app>
+cp ~/.config/<app>/<file> <module>/.config/<file>
+./stow.sh
+# If stow conflicts with existing files, remove them and re-run:
+rm ~/.config/<app>/<file>
+./stow.sh
+```
+
+### Existing files (same names)
+If the system has files with the **same names** as those in the repo, use `--adopt` to copy the local contents into the repo and replace them with symlinks in one step:
+
+```bash
+stow --adopt -v -t ~ <module>
+```
+
+This preserves your local changes and makes the repo the source of truth going forward.
+
 ## Important Notes
 
 - **hyprland/.config/ml4w/settings/browser.sh** contains `zen-browser` preference (preserved during sync)
