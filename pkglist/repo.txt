@@ -1,5 +1,6 @@
 7zip
 amd-ucode
+awww
 base
 base-devel
 bc
@@ -37,6 +38,9 @@ go
 grim
 gsfonts
 gst-plugin-pipewire
+gst-plugins-bad
+gst-plugins-good
+gst-plugins-ugly
 gvfs
 gvfs-smb
 hplip
@@ -66,6 +70,7 @@ lynx
 mako
 meld
 mesa-utils
+mkdocs
 mokutil
 nano
 nautilus
@@ -98,12 +103,14 @@ podman
 polkit-gnome
 power-profiles-daemon
 protontricks
+prusa-slicer
 python-libusb1
 python-pip
 qt5-graphicaleffects
 qt5-quickcontrols2
 qt5-svg
 qt6ct
+quickshell
 rofi
 samba
 sane
@@ -116,7 +123,6 @@ starship
 steam
 stow
 swaync
-swww
 system-config-printer
 terraform
 tesseract
@@ -131,6 +137,8 @@ tumbler
 usb_modeswitch
 uwsm
 vim
+vivaldi
+vivaldi-ffmpeg-codecs
 vlc
 waybar
 wget
