@@ -13,4 +13,14 @@
       </metadata>
     </info>
   </bookmark>
+  <bookmark href="sftp://agravelot@voron2.agravelot.eu/" added="2026-06-09T23:16:36.636610Z" modified="2026-06-09T23:16:36.636613Z" visited="2026-06-09T23:16:36.636611Z">
+    <title>/ on voron2.agravelot.eu</title>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2026-06-09T23:16:36.636612Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
 </xbel>
