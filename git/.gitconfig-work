@@ -1,0 +1,9 @@
+[user]
+	name = Antoine GRAVELOT
+	email = antoine.gravelot@mon-marche.fr
+	signingkey = ~/.ssh/mmfr-id_ed25519.pub
+
+
+; Enforce go mod to use ssh keys
+[url "ssh://git@work.github.com/"]
+	insteadOf = https://github.com/
