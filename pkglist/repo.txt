@@ -26,12 +26,14 @@ firefox
 fish
 fisher
 flatpak
+fluxcd
 fzf
 ghostscript
 git
 git-delta
 github-cli
 gnome-calculator
+gnome-disk-utility
 gnome-text-editor
 gnome-themes-extra
 go
@@ -50,6 +52,7 @@ hyprpicker
 imagemagick
 imv
 inotify-tools
+inter-font
 iwd
 joyutils
 k9s
