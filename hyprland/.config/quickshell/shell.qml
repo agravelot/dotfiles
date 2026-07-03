@@ -1,3 +1,5 @@
+//@ pragma UseQApplication
+
 import Quickshell
 import Quickshell.Io
 import "WelcomeApp"
@@ -5,6 +7,7 @@ import "PowerApp"
 import "SidebarApp"
 import "CalendarApp"
 import "WallpaperApp"
+import "StatusbarApp"
 import "CustomTheme"
 
 ShellRoot {
@@ -22,4 +25,5 @@ ShellRoot {
     SidebarWindow {}
     CalendarWindow {}
     WallpaperWindow {}
+    StatusbarWindow {}
 }
