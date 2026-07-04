@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+set -e
+
 REPO_URL="https://github.com/mylinuxforwork/dotfiles.git"
 TMP_DIR="/tmp/mylinuxforwork-dotfiles"
 DEST="/home/agravelot/lab/dotfiles/hyprland"
@@ -12,7 +14,8 @@ git clone --depth 1 "$REPO_URL" "$TMP_DIR"
 
 echo "Removing things i do not want..."
 rm -rf "$TMP_DIR"/dotfiles/.zshrc
-rm -rf "$TMP_DIR"/dotfiles/.config/fish
+rm -f "$TMP_DIR"/dotfiles/.config/fish/config.fish
+rm -f "$TMP_DIR"/dotfiles/.config/fish/fish_variables
 rm -rf "$TMP_DIR"/dotfiles/.config/zshrc
 rm -rf "$TMP_DIR"/dotfiles/.config/kitty
 rm -rf "$TMP_DIR"/dotfiles/.config/nvim
