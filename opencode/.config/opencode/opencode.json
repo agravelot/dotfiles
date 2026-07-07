@@ -8,6 +8,12 @@
         "write": false,
         "edit": false
       }
+    },
+    "explore": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
     }
   },
   "command": {
@@ -16,5 +22,9 @@
       "description": "Run tests with coverage",
       "agent": "build"
     }
-  }
+  },
+  "plugin": [
+    "oh-my-opencode-slim"
+  ],
+  "lsp": true
 }
