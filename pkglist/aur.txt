@@ -2,7 +2,6 @@ aur-auto-vote-git
 aurutils
 bibata-cursor-theme-bin
 brave-bin
-checkupdates-with-aur
 freetube-bin
 github-copilot-cli
 google-chrome
@@ -18,7 +17,6 @@ localsend-bin
 maki-bin
 maplemono-nf
 marktext-bin
-ml4w-hyprland
 nautilus-open-any-terminal
 ocx
 oh-my-posh-bin
@@ -27,7 +25,6 @@ orca-slicer-bin
 oversteer
 pacseek
 paru
-paru-debug
 phonon-qt6-mpv
 pinta
 preflight
