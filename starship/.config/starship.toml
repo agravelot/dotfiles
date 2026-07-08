@@ -1,26 +1,71 @@
 add_newline = false
-# A minimal left prompt
-format = """$directory$character"""
+format = """$directory$git_branch$git_status$character"""
+right_format = """$cmd_duration$nodejs$python$rust$golang$kubernetes$aws"""
 palette = "catppuccin_mocha"
-# move the rest of the prompt to the right
-right_format = """$all"""
 
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
 
-[aws]
-format = 'on [$symbol($profile )(\($region\) )]($style)'
-style = 'bold blue'
-symbol = "  "
+[directory]
+truncation_length = 5
+truncate_to_repo = true
+
+[git_branch]
+format = 'on [$symbol$branch]($style) '
+symbol = ' '
+style = 'bold purple'
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = 'bold red'
+conflicted = '='
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇡${ahead_count}⇣${behind_count}'
+untracked = '?${count}'
+stashed = '$${count}'
+modified = '!${count}'
+staged = '+${count}'
+renamed = '»${count}'
+deleted = '✘${count}'
+
+[cmd_duration]
+min_time = 2000
+format = 'took [$duration]($style) '
+style = 'bold yellow'
+
+[status]
+disabled = false
+symbol = '✘'
+format = '[$symbol$status]($style) '
+
+[nodejs]
+format = 'via [$symbol($version)]($style) '
+symbol = ' '
+
+[python]
+format = 'via [$symbol$version]($style) '
+symbol = ' '
+
+[rust]
+format = 'via [$symbol$version]($style) '
+symbol = ' '
 
 [golang]
-format = '[ ](bold cyan)'
+format = 'via [$symbol$version]($style) '
+symbol = ' '
+
+[aws]
+format = 'on [$symbol($profile)(\($region\))]($style) '
+style = 'bold yellow'
+symbol = '  '
 
 [kubernetes]
 symbol = '☸ '
 disabled = false
-detect_files = ['Dockerfile']
-format = '[$context(\[$namespace\])]($style) '
-# [kubernetes.context_aliases]
-# 'arn:aws:eks:us-west-2:577926974532:cluster/gal-kub-demo-cluster' = 'gal'
+detect_files = ['kustomization.yaml', 'kustomization.yml', 'deployment.yaml', 'deployment.yml', 'Chart.yaml']
+format = '[$symbol$context(\($namespace\))]($style) '
 
 [docker_context]
 disabled = true
