@@ -8,12 +8,6 @@
         "write": false,
         "edit": false
       }
-    },
-    "explore": {
-      "disable": true
-    },
-    "general": {
-      "disable": true
     }
   },
   "command": {
@@ -21,10 +15,36 @@
       "template": "Run the full test suite with coverage report and show any failures.\nFocus on the failing tests and suggest fixes.",
       "description": "Run tests with coverage",
       "agent": "build"
+    },
+    "pr-loop": {
+      "template": "For the current pull request: 1. Fetch all unresolved review comments. 2. Fetch the latest required status checks and CI results. 3. Categorize the remaining work into review feedback, failing CI, and follow-up verification. 4. Produce an execution plan that resolves every unresolved comment, fixes any failing CI, and ends with all required checks passing and no unresolved review comments remaining.",
+      "agent": "plan"
     }
   },
   "plugin": [
-    "oh-my-opencode-slim"
+    "oh-my-opencode-slim",
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "opencode-power-pack@git+https://github.com/waybarrios/opencode-power-pack.git"
   ],
-  "lsp": true
+  "lsp": false,
+  "mcp": {
+    "github": {
+      "type": "local",
+      "command": [
+        "podman",
+        "run",
+        "-i",
+        "--rm",
+        "-p",
+        "127.0.0.1:8085:8085",
+        "-e",
+        "GITHUB_OAUTH_CALLBACK_PORT",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "enabled": true,
+      "environment": {
+        "GITHUB_OAUTH_CALLBACK_PORT": "8085"
+      }
+    }
+  }
 }
