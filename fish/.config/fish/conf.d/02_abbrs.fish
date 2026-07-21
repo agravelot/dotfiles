@@ -63,3 +63,8 @@ abbr --command=git dbt "diff origin/main..."
 
 abbr --command=npm i install
 #abbr --command=pnpm i "install"
+
+# Use Podman as Docker if Podman is installed
+if command -q podman
+    alias docker podman
+end
