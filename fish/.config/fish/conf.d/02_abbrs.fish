@@ -45,6 +45,7 @@ abbr --add cat 'bat -P'
 abbr --add n npm
 abbr --add y yarn
 abbr --add oc opencode
+abbr --add occ 'opencode --continue'
 abbr --add lg lazygit
 
 # mv, rm, cp
