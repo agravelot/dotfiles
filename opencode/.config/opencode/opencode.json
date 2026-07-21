@@ -28,6 +28,11 @@
   ],
   "lsp": false,
   "mcp": {
+    "codebase-memory-mcp": {
+      "type": "local",
+      "command": ["/usr/bin/codebase-memory-mcp"],
+      "enabled": true
+    },
     "github": {
       "type": "local",
       "command": [
