@@ -1,53 +1,42 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
-  "preset": "opencode-go-free",
+  "preset": "openrouter",
   "presets": {
     "openai": {
       "orchestrator": {
         "model": "openai/gpt-5.5",
         "variant": "medium",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*",
-          "!context7"
-        ]
+        "skills": ["*", "!node", "!fastify-best-practices", "!typescript-magician", "!frontend-design", "!clonedeps", "!codemap"],
+        "mcps": ["codebase-memory-mcp", "github"]
       },
       "oracle": {
         "model": "openai/gpt-5.5",
         "variant": "high",
-        "skills": [
-          "simplify"
-        ],
+        "skills": ["simplify", "systematic-debugging", "code-explorer", "code-review", "node", "fastify-best-practices", "typescript-magician"],
         "mcps": []
       },
       "librarian": {
         "model": "openai/gpt-5.4-mini",
         "variant": "low",
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
+        "skills": ["clonedeps"],
+        "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
         "model": "openai/gpt-5.4-mini",
         "variant": "low",
-        "skills": [],
+        "skills": ["codebase-memory", "codemap"],
         "mcps": []
       },
       "designer": {
         "model": "openai/gpt-5.4-mini",
         "variant": "medium",
-        "skills": [],
+        "skills": ["frontend-design"],
         "mcps": []
       },
       "fixer": {
         "model": "openai/gpt-5.5",
         "variant": "low",
-        "skills": [],
+        "skills": ["systematic-debugging", "test-driven-development"],
         "mcps": []
       }
     },
@@ -55,47 +44,36 @@
       "orchestrator": {
         "model": "opencode/nemotron-3-ultra-free",
         "variant": "medium",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*",
-          "!context7"
-        ]
+        "skills": ["*", "!node", "!fastify-best-practices", "!typescript-magician", "!frontend-design", "!clonedeps", "!codemap"],
+        "mcps": ["codebase-memory-mcp", "github"]
       },
       "oracle": {
         "model": "opencode/nemotron-3-ultra-free",
         "variant": "high",
-        "skills": [
-          "simplify"
-        ],
+        "skills": ["simplify", "systematic-debugging", "code-explorer", "code-review", "node", "fastify-best-practices", "typescript-magician"],
         "mcps": []
       },
       "librarian": {
         "model": "opencode/deepseek-v4-flash-free",
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
+        "skills": ["clonedeps"],
+        "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
         "model": "opencode/hy3-free",
         "variant": "low",
-        "skills": [],
+        "skills": ["codebase-memory", "codemap"],
         "mcps": []
       },
       "designer": {
         "model": "opencode/mimo-v2.5-free",
         "variant": "medium",
-        "skills": [],
+        "skills": ["frontend-design"],
         "mcps": []
       },
       "fixer": {
         "model": "opencode/north-mini-code-free",
         "variant": "high",
-        "skills": [],
+        "skills": ["systematic-debugging", "test-driven-development"],
         "mcps": []
       },
       "observer": {
@@ -108,48 +86,37 @@
       "orchestrator": {
         "model": "gpt-5.2",
         "variant": "medium",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*",
-          "!context7"
-        ]
+        "skills": ["*", "!node", "!fastify-best-practices", "!typescript-magician", "!frontend-design", "!clonedeps", "!codemap"],
+        "mcps": ["codebase-memory-mcp", "github"]
       },
       "oracle": {
         "model": "claude-sonnet-4.5",
         "variant": "high",
-        "skills": [
-          "simplify"
-        ],
+        "skills": ["simplify", "systematic-debugging", "code-explorer", "code-review", "node", "fastify-best-practices", "typescript-magician"],
         "mcps": []
       },
       "librarian": {
         "model": "minimax-m2.1",
         "variant": "low",
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
+        "skills": ["clonedeps"],
+        "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
         "model": "minimax-m2.1",
         "variant": "low",
-        "skills": [],
+        "skills": ["codebase-memory", "codemap"],
         "mcps": []
       },
       "designer": {
         "model": "gpt-5.1-codex",
         "variant": "medium",
-        "skills": [],
+        "skills": ["frontend-design"],
         "mcps": []
       },
       "fixer": {
         "model": "gpt-5.2",
         "variant": "low",
-        "skills": [],
+        "skills": ["systematic-debugging", "test-driven-development"],
         "mcps": []
       },
       "observer": {
@@ -162,48 +129,37 @@
       "orchestrator": {
         "model": "github-copilot/gpt-5.5",
         "variant": "medium",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*",
-          "!context7"
-        ]
+        "skills": ["*", "!node", "!fastify-best-practices", "!typescript-magician", "!frontend-design", "!clonedeps", "!codemap"],
+        "mcps": ["codebase-memory-mcp", "github"]
       },
       "oracle": {
         "model": "github-copilot/claude-sonnet-4.5",
         "variant": "high",
-        "skills": [
-          "simplify"
-        ],
+        "skills": ["simplify", "systematic-debugging", "code-explorer", "code-review", "node", "fastify-best-practices", "typescript-magician"],
         "mcps": []
       },
       "librarian": {
         "model": "github-copilot/gpt-4o-mini",
         "variant": "low",
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
+        "skills": ["clonedeps"],
+        "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
         "model": "github-copilot/gpt-4o-mini",
         "variant": "low",
-        "skills": [],
+        "skills": ["codebase-memory", "codemap"],
         "mcps": []
       },
       "designer": {
         "model": "github-copilot/claude-sonnet-4.5",
         "variant": "medium",
-        "skills": [],
+        "skills": ["frontend-design"],
         "mcps": []
       },
       "fixer": {
         "model": "github-copilot/gpt-4o",
         "variant": "low",
-        "skills": [],
+        "skills": ["systematic-debugging", "test-driven-development"],
         "mcps": []
       },
       "observer": {
@@ -214,54 +170,43 @@
     },
     "openrouter": {
       "orchestrator": {
-        "model": "openrouter/anthropic/claude-sonnet-4.5",
+        "model": "openrouter/deepseek/deepseek-v4-pro",
         "variant": "medium",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*",
-          "!context7"
-        ]
+        "skills": ["*", "!node", "!fastify-best-practices", "!typescript-magician", "!frontend-design", "!clonedeps", "!codemap"],
+        "mcps": ["codebase-memory-mcp", "github"]
       },
       "oracle": {
-        "model": "openrouter/anthropic/claude-sonnet-4.5",
+        "model": "openrouter/deepseek/deepseek-v4-pro",
         "variant": "high",
-        "skills": [
-          "simplify"
-        ],
+        "skills": ["simplify", "systematic-debugging", "code-explorer", "code-review", "node", "fastify-best-practices", "typescript-magician"],
         "mcps": []
       },
       "librarian": {
-        "model": "openrouter/openai/gpt-4o-mini",
+        "model": "openrouter/deepseek/deepseek-v4-flash",
         "variant": "low",
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
+        "skills": ["clonedeps"],
+        "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
-        "model": "openrouter/openai/gpt-4o-mini",
+        "model": "openrouter/deepseek/deepseek-v4-flash",
         "variant": "low",
-        "skills": [],
+        "skills": ["codebase-memory", "codemap"],
         "mcps": []
       },
       "designer": {
-        "model": "openrouter/anthropic/claude-sonnet-4.5",
+        "model": "openrouter/moonshotai/kimi-k2.7-code",
         "variant": "medium",
-        "skills": [],
+        "skills": ["frontend-design"],
         "mcps": []
       },
       "fixer": {
-        "model": "openrouter/openai/gpt-4o",
+        "model": "openrouter/deepseek/deepseek-v4-flash",
         "variant": "low",
-        "skills": [],
+        "skills": ["systematic-debugging", "test-driven-development"],
         "mcps": []
       },
       "observer": {
-        "model": "openrouter/openai/gpt-4o",
+        "model": "openrouter/google/gemini-2.5-flash",
         "skills": [],
         "mcps": []
       }
