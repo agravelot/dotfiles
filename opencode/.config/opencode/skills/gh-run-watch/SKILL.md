@@ -2,7 +2,7 @@
 name: gh-run-watch
 description: >
   Watch GitHub Actions CI runs for completion using `gh run watch --compact`
-  with minimal, token-efficient output. Triggers after code changes, git
+  with deduplication and pre-discovery. Triggers after code changes, git
   pushes, or when the user asks to check CI status, wait for workflows, or
   verify that CI passed.
 ---
@@ -11,7 +11,10 @@ description: >
 
 ## Overview
 
-Use `gh run watch` to wait for a GitHub Actions run to complete and report only the essential outcome. Prefers the `--compact` flag to surface only failed/relevant steps, minimizing token consumption.
+Discover active CI runs on the current branch, then watch each one with
+deduplicated output. A single push often triggers multiple workflows
+(e.g. api-go, api-laravel, admin) — the skill discovers them all before
+watching.
 
 ## When to Use
 
@@ -22,47 +25,69 @@ Use `gh run watch` to wait for a GitHub Actions run to complete and report only 
 
 ## Process
 
-### 1. Watch the run
+### 1. Discover active runs
 
 ```bash
-gh run watch --compact --exit-status
+branch=$(git branch --show-current)
+gh run list --branch "$branch" --limit 10 --json databaseId,displayTitle,status,workflowName
 ```
 
-- `--compact` shows only relevant (failed or in-progress) steps, not every passing step.
-- `--exit-status` ensures the command exits non-zero if CI fails, so you can branch on the result.
-- The command blocks until the run finishes or is cancelled.
+Parse the JSON to categorize runs:
 
-### 2. Report the outcome
+| Status | Action |
+|--------|--------|
+| queued / in_progress | Need watching |
+| completed | Report conclusion immediately |
 
-**If it passes (exit code 0):** output a single line:
+If all runs are already completed, skip to step 3.
+
+If the user requested a specific run ID, skip discovery and go directly to step 2.
+
+### 2. Watch each in-progress run
+
+For each queued/in_progress run, watch sequentially:
+
+```bash
+gh run watch <id> --compact --exit-status 2>&1 \
+  | sed '/^Refreshing run status/d' \
+  | awk '!seen[$0]++'
+```
+
+- `sed` strips the repetitive "Refreshing run status..." ticker
+- `awk '!seen[$0]++'` deduplicates all output — header prints once, only job status transitions produce new lines
+- `--compact` hides passing step details
+- `--exit-status` exits non-zero on failure
+
+Add `-i 15` for slow-running workflows to reduce poll frequency.
+
+### 3. Report the outcome
+
+Per workflow:
 
 ```
-CI passed
+✓ <workflow>
+✗ <workflow>
+- <workflow> (skipped/cancelled)
 ```
 
-**If it fails (non-zero exit code):** output:
+Single-line summary:
+- All passed → `CI passed`
+- Any failed → `CI failed: <workflow-names>`
 
-```
-CI failed: <failed-job-names>
-```
-
-Extract the failed job names from the `gh run watch` output. If the output is too long, pipe through `tail` to get the final summary.
-
-### 3. Helpful flags
+### 4. Helpful flags
 
 | Flag | Effect |
 |------|--------|
-| `gh run watch` | Watches the most recent run on the current branch |
-| `gh run watch 12345` | Watches a specific run by ID |
+| `gh run watch <id>` | Watch a specific run by ID |
 | `-R owner/repo` | Watch a run in a different repository |
-| `-i 30` | Check every 30s instead of the default 3s (saves poll requests) |
+| `-i 30` | Check every 30s instead of 3s |
 
-### 4. Edge cases
+### 5. Edge cases
 
-- **No runs exist:** `gh run watch` exits with "no runs found." Report that and stop.
-- **Run already completed:** The command exits immediately with the final status.
-- **Run cancelled:** Treated as a failure — report which job was cancelled.
-- **Multiple runs in progress:** The command picks the most recent. Pass an explicit run ID if needed.
+- **No runs on branch:** report "No runs found for `<branch>`" and stop
+- **All runs already completed:** report status from discovery JSON, skip watching
+- **Run cancelled:** treated as failure, report which workflow
+- **Multiple runs queued:** watch all sequentially, report per-workflow
 
 ## Verification
 
