@@ -8,6 +8,12 @@
         "write": false,
         "edit": false
       }
+    },
+    "explore": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
     }
   },
   "command": {
@@ -22,15 +28,17 @@
     }
   },
   "plugin": [
-    "oh-my-opencode-slim",
     "superpowers@git+https://github.com/obra/superpowers.git",
-    "opencode-power-pack@git+https://github.com/waybarrios/opencode-power-pack.git"
+    "opencode-power-pack@git+https://github.com/waybarrios/opencode-power-pack.git",
+    "oh-my-opencode-slim"
   ],
   "lsp": false,
   "mcp": {
     "codebase-memory-mcp": {
       "type": "local",
-      "command": ["/usr/bin/codebase-memory-mcp"],
+      "command": [
+        "/usr/bin/codebase-memory-mcp"
+      ],
       "enabled": true
     },
     "github": {

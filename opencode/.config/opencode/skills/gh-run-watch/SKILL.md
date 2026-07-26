@@ -1,10 +1,9 @@
 ---
 name: gh-run-watch
 description: >
-  Watch GitHub Actions CI runs for completion using `gh run watch --compact`
-  with deduplication and pre-discovery. Triggers after code changes, git
-  pushes, or when the user asks to check CI status, wait for workflows, or
-  verify that CI passed.
+  Use when waiting for CI checks to finish — instead of writing `sleep` loops
+  or polling `gh run view`. Triggers after git push, PR creation, or when
+  the user asks to check/verify CI status or workflow completion.
 ---
 
 # CI Run Watch
