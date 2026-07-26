@@ -3,7 +3,7 @@ set -e
 
 REPO_URL="https://github.com/end-4/dots-hyprland.git"
 CACHE_DIR="$HOME/.cache/dots-hyprland"
-STOW_MODULE="hyperland2"
+STOW_MODULE="hyprland2"
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 MODULE_DIR="$DOTFILES_DIR/$STOW_MODULE"
 
@@ -13,7 +13,7 @@ UPDATE_ONLY=false
 DO_UNINSTALL=false
 
 show_help() {
-  cat << 'EOF'
+  cat <<'EOF'
 Usage: ./sync-dots-hyprland.sh [OPTIONS]
 
 Sync and install end-4/dots-hyprland with GNU Stow support.
@@ -22,7 +22,7 @@ Steps:
   1. Clone/update upstream repo to ~/.cache/dots-hyprland
   2. Install Arch dependencies via upstream PKGBUILDs
   3. Run system setups (user groups, systemd services, python venv)
-  4. Stage config files into hyperland2/ stow module
+  4. Stage config files into hyprland2/ stow module
   5. Stow symlinks into $HOME
 
 Options:
@@ -113,31 +113,31 @@ do_unstow() {
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    -h|--help)
-      show_help
-      exit 0
-      ;;
-    --skip-deps)
-      SKIP_DEPS=true
-      shift
-      ;;
-    --skip-setups)
-      SKIP_SETUPS=true
-      shift
-      ;;
-    --update-only)
-      UPDATE_ONLY=true
-      shift
-      ;;
-    --uninstall)
-      DO_UNINSTALL=true
-      shift
-      ;;
-    *)
-      echo "Error: unknown option $1" >&2
-      show_help
-      exit 1
-      ;;
+  -h | --help)
+    show_help
+    exit 0
+    ;;
+  --skip-deps)
+    SKIP_DEPS=true
+    shift
+    ;;
+  --skip-setups)
+    SKIP_SETUPS=true
+    shift
+    ;;
+  --update-only)
+    UPDATE_ONLY=true
+    shift
+    ;;
+  --uninstall)
+    DO_UNINSTALL=true
+    shift
+    ;;
+  *)
+    echo "Error: unknown option $1" >&2
+    show_help
+    exit 1
+    ;;
   esac
 done
 
