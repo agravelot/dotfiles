@@ -2,7 +2,7 @@
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "preset": "openrouter",
   "presets": {
-    "openrouter-openai": {
+    "openrouter-v2": {
       "orchestrator": {
         "model": "openrouter/openai/gpt-5.6-terra",
         "variant": "xhigh",
@@ -38,7 +38,7 @@
         "mcps": ["websearch", "context7", "gh_grep"]
       },
       "explorer": {
-        "model": "openrouter/openai/gpt-5.6-luna",
+        "model": "openrouter/deepseek/deepseek-v4-flash",
         "variant": "low",
         "skills": ["codebase-memory", "codemap"],
         "mcps": []
