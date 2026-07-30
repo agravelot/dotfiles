@@ -61,6 +61,18 @@
       "environment": {
         "GITHUB_OAUTH_CALLBACK_PORT": "8085"
       }
+    },
+    "homeassistant": {
+      "type": "remote",
+      "url": "http://ha.agravelot.eu:8123/api/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:HOMEASSISTANT_TOKEN}"
+      }
+    },
+    "ha-mcp": {
+      "type": "remote",
+      "url": "http://ha.agravelot.eu:9584/private_b6G3hbT3sf0RNksUKRbp8g",
+      "enabled": true
     }
   }
 }
