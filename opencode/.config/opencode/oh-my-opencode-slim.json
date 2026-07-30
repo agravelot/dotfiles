@@ -5,6 +5,10 @@
     "openrouter-v2": {
       "orchestrator": {
         "model": "openrouter/openai/gpt-5.6-terra",
+        "temperature": 0.5,
+        "options": {
+          "textVerbosity": "medium"
+        },
         "variant": "high",
         "skills": [
           "*",
@@ -22,6 +26,10 @@
       },
       "oracle": {
         "model": "openrouter/openai/gpt-5.6-sol",
+        "temperature": 0.2,
+        "options": {
+          "textVerbosity": "low"
+        },
         "variant": "high",
         "skills": [
           "simplify",
@@ -38,6 +46,10 @@
       },
       "librarian": {
         "model": "openrouter/deepseek/deepseek-v4-flash",
+        "temperature": 0.4,
+        "options": {
+          "textVerbosity": "low"
+        },
         "variant": "low",
         "skills": [
           "clonedeps"
@@ -50,6 +62,10 @@
       },
       "explorer": {
         "model": "openrouter/deepseek/deepseek-v4-flash",
+        "temperature": 0.3,
+        "options": {
+          "textVerbosity": "low"
+        },
         "variant": "low",
         "skills": [
           "codebase-memory",
@@ -59,6 +75,10 @@
       },
       "designer": {
         "model": "openrouter/openai/gpt-5.6-luna",
+        "temperature": 0.8,
+        "options": {
+          "textVerbosity": "medium"
+        },
         "variant": "medium",
         "skills": [
           "frontend-design"
@@ -67,6 +87,10 @@
       },
       "fixer": {
         "model": "openrouter/openai/gpt-5.6-luna",
+        "temperature": 0.3,
+        "options": {
+          "textVerbosity": "low"
+        },
         "variant": "xhigh",
         "skills": [
           "systematic-debugging",
@@ -76,6 +100,11 @@
       },
       "observer": {
         "model": "openrouter/openai/gpt-5.6-luna",
+        "temperature": 0.4,
+        "variant": "medium",
+        "options": {
+          "textVerbosity": "low"
+        },
         "skills": [],
         "mcps": []
       }
