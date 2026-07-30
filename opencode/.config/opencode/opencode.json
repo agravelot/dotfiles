@@ -1,5 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "bash": {
+      "sops *": "deny"
+    }
+  },
   "agent": {
     "code-reviewer": {
       "description": "Reviews code for best practices and potential issues",
