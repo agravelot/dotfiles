@@ -22,7 +22,12 @@
       "color": "#22C55E"
     },
     "explore": {
-      "disable": false
+      "disable": false,
+      "model": "openrouter/deepseek/deepseek-v4-flash"
+    },
+    "scout": {
+      "mode": "subagent",
+      "model": "openrouter/deepseek/deepseek-v4-flash"
     },
     "general": {
       "disable": false
