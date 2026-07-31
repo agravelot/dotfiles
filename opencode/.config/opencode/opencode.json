@@ -22,10 +22,10 @@
       "color": "#22C55E"
     },
     "explore": {
-      "disable": true
+      "disable": false
     },
     "general": {
-      "disable": true
+      "disable": false
     }
   },
   "command": {
