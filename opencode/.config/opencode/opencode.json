@@ -9,10 +9,17 @@
     "code-reviewer": {
       "description": "Reviews code for best practices and potential issues",
       "prompt": "You are a code reviewer reviewing the current branch. Focus on security, performance, and maintainability. Check for bugs, anti-patterns, and suggest improvements.",
+      "color": "#EF4444",
       "tools": {
         "write": false,
         "edit": false
       }
+    },
+    "build": {
+      "color": "#8B5CF6"
+    },
+    "plan": {
+      "color": "#22C55E"
     },
     "explore": {
       "disable": true
