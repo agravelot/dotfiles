@@ -24,6 +24,12 @@ return {
       -- end,
     },
   },
+  {
+    "wtfox/luna.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
   -- {
   --   "navarasu/onedark.nvim",
   --   opts = {
@@ -160,11 +166,12 @@ return {
       -- colorscheme = "kanagawa-wave",
       -- colorscheme = "catppuccin",
       -- colorscheme = "monokai-nightasty",
-      colorscheme = "tokyonight-night",
+      -- colorscheme = "tokyonight-night",
       -- colorscheme = "gruvbox",
       -- colorscheme = "cyberdream",
       -- colorscheme = "flexoki-dark",
       -- colorscheme = "rose-pine",
+      colorscheme = "luna",
     },
   },
   -- { "rose-pine/neovim", name = "rose-pine" },
