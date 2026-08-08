@@ -5,6 +5,15 @@
       "sops *": "deny"
     }
   },
+  "provider": {
+    "openrouter": {
+      "options": {
+        "provider": {
+          "allow_fallbacks": false
+        }
+      }
+    }
+  },
   "agent": {
     "code-reviewer": {
       "description": "Reviews code for best practices and potential issues",
