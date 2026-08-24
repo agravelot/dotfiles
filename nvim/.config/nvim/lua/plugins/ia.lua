@@ -24,10 +24,10 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
   },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   opts = {
-  --     copilot_node_command = find_node_path(), -- solution bypass volta shims
-  --   },
-  -- },
+  {
+    "zbirenbaum/copilot.lua",
+    opts = {
+      copilot_node_command = find_node_path(), -- solution bypass volta shims
+    },
+  },
 }
