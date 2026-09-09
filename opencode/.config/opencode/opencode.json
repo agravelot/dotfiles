@@ -32,11 +32,11 @@
     },
     "explore": {
       "disable": false,
-      "model": "openrouter/deepseek/deepseek-v4-flash"
+      "model": "openrouter/deepseek/deepseek-v4-flash-0731"
     },
     "scout": {
       "mode": "subagent",
-      "model": "openrouter/deepseek/deepseek-v4-flash"
+      "model": "openrouter/deepseek/deepseek-v4-flash-0731"
     },
     "general": {
       "disable": false
