@@ -92,6 +92,11 @@
       "url": "https://mcp.braze.eu/mcp",
       "type": "remote",
       "enabled": false
+    },
+    "jira": {
+      "url": "https://mcp.atlassian.com/v2/mcp",
+      "type": "remote",
+      "enabled": false
     }
   }
 }
